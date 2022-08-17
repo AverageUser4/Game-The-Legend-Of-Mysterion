@@ -1,10 +1,17 @@
 'use strict';
 
-const testCinematicor = new Cinematicor();
+const cinematicor = new Cinematicor();
+const progressor = new Progressor();
 
-testCinematicor.startCinematic(
-  [
-    {text: 'Ziemie Mysterionu... Pamiętam je jakby to było wczoraj. Wielu mężnych wojowników gotowych było zginąć, by oddać za nie swe życie.'},
-    {text: 'Ale nadeszły ciężkie czasy... nasze królestwo nie jest już takie samo jak kiedyś.'}
-  ]
-);
+if(progressor.getQuestId() === 0) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.onload = () => {
+    const introContent = JSON.parse(xhr.responseText);
+    cinematicor.startCinematic(introContent);
+    progressor.setQuestId(1);
+  };
+
+  xhr.open('GET', 'resources/cinematics/game-intro.json');
+  xhr.send();
+}

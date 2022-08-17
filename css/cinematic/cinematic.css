@@ -1,5 +1,5 @@
 .cinematic {
-  display: block;
+  display: none;
   position: fixed;
   top: 0;
   width: 100%;
@@ -10,7 +10,6 @@
 
 .cinematic__media-container {
   margin: 50px auto 0;
-  background-color: red;
   width: 800px;
   height: 600px;
 }
@@ -26,6 +25,29 @@
   margin: auto;
   font-size: 1.4rem;
   line-height: 120%;
+  border-radius: 0;
+  background-color: #00043B;
+  color: #BC9645;
+  border: 3px solid #BC9645;
+}
+.cinematic__text-button:hover {
+  background-color: #11154c;
+}
+
+.cinematic__skip-button {
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 12px 16px;
+  border-radius: 0;
+  background-color: #00043B;
+  color: #BC9645;
+  border: 3px solid #BC9645;
+}
+.cinematic__skip-button:hover {
+  background-color: #11154c;
 }
 
 /*# sourceMappingURL=cinematic.css.map */

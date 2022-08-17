@@ -22,9 +22,14 @@ class Cinematicor {
 
     this.abortController = new AbortController();
 
+    this.setVoiceLanguage();
+    speechSynthesis.addEventListener('voiceschanged', () => this.setVoiceLanguage());
+  }
+
+  setVoiceLanguage() {
     const voices = window.speechSynthesis.getVoices();
     for(let val of voices) {
-      if(val.lang === 'pl') {
+      if(val.lang === 'pl' || val.lang === 'pl-PL') {
         this.polishVoice = val;
         break;
       }
@@ -37,10 +42,18 @@ class Cinematicor {
     this.cinematicData = cinematicData;
 
     this.textButton.addEventListener('click', () => this.advanceCinematic(), { signal: this.abortController.signal });
+    this.mediaContainer.addEventListener('click', () => this.advanceCinematic(), { signal: this.abortController.signal });
     this.skipButton.addEventListener('click', () => this.endCinematic(), { signal: this.abortController.signal });
+    window.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape')
+        this.endCinematic()
+      else if(e.key === ' ')
+        this.advanceCinematic();
+    }, { signal: this.abortController.signal });
 
     this.advanceCinematic();
 
+    document.body.style.overflow = 'hidden';
     this.cinematicContainer.style.display = 'block';
   }
 
@@ -60,11 +73,14 @@ class Cinematicor {
 
     const uter = new SpeechSynthesisUtterance(obj.text);
     uter.voice = this.polishVoice;
+    window.speechSynthesis.cancel();
     window.speechSynthesis.speak(uter);
   }
 
   endCinematic() {
+    window.speechSynthesis.cancel();
     this.abortController.abort();
+    document.body.style.overflow = 'auto';
     this.cinematicContainer.style.display = 'none';
   }
 }

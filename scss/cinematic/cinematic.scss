@@ -1,5 +1,7 @@
+@use '../general/var';
+
 .cinematic {
-  display: block;
+  display: none;
   position: fixed;
   top: 0;
   width: 100%;
@@ -10,7 +12,6 @@
 
 .cinematic__media-container {
   margin: 50px auto 0;
-  background-color: red;
   width: 800px;
   height: 600px;
   & > * {
@@ -26,4 +27,27 @@
   margin: auto;
   font-size: 1.4rem;
   line-height: 120%;
+  border-radius: 0;
+  background-color: var.$main-background-color;
+  color: var.$main-font-color;
+  border: 3px solid var.$main-font-color;
+  &:hover {
+    background-color: var.$main-background-color--active;
+  }
+}
+
+.cinematic__skip-button {
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 12px 16px;
+  border-radius: 0;
+  background-color: var.$main-background-color;
+  color: var.$main-font-color;
+  border: 3px solid var.$main-font-color;
+  &:hover {
+    background-color: var.$main-background-color--active;
+  }
 }
