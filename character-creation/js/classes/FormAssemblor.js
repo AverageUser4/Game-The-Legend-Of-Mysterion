@@ -3,10 +3,17 @@
 class FormAssemblor {
 
   form;
+  advancedButton;
   baseColorSelect;
+  prependixCount = -1;
+
+  formIdValue = 0;
+  get formId() {
+    return ++this.formIdValue;
+  }
 
   constructor() {
-    this.form = document.querySelector('.the-form');
+    this.advancedButton = document.querySelector('.advanced-button');
 
     fetch('resources/data/colors-polish.json')
       .then((response) => response.json())
@@ -21,10 +28,36 @@ class FormAssemblor {
       opt.textContent = val;
       this.baseColorSelect.appendChild(opt);
     }
+
+    this.createAndAddFieldset();
+    this.createAndAddFieldset(' ojca');
+    this.createAndAddFieldset(' matki');
+
+    this.advancedButton.addEventListener('click', () => this.applyAdvanced());
   }
 
-  // famName ' dziadka', ' babki', itd.
-  createFieldset(famName = '') {
+  applyAdvanced() {
+    this.advancedButton.textContent = 'Bardziej zaawansowane...';
+
+    if(this.prependixCount === -1) {
+      this.createAndAddFieldset(` dziadka ze strony ojca`);
+      this.createAndAddFieldset(` babki ze strony ojca`);
+      this.createAndAddFieldset(` dziadka ze strony matki`);
+      this.createAndAddFieldset(` babki ze strony matki`);
+      this.prependixCount++;
+      return;
+    }
+
+    this.createAndAddFieldset(` ${'pra-'.repeat(this.prependixCount + 1)}dziadka ze strony ${'pra-'.repeat(this.prependixCount)}dziadka`);
+    this.createAndAddFieldset(` ${'pra-'.repeat(this.prependixCount + 1)}babki ze strony ${'pra-'.repeat(this.prependixCount)}dziadka`);
+    this.createAndAddFieldset(` ${'pra-'.repeat(this.prependixCount + 1)}dziadka ze strony ${'pra-'.repeat(this.prependixCount)}babki`);
+    this.createAndAddFieldset(` ${'pra-'.repeat(this.prependixCount + 1)}babki ze strony ${'pra-'.repeat(this.prependixCount)}babki`);
+    this.prependixCount++;
+  }
+
+  // famName ' matki', ' babki (ze strony ojca)', itd.
+  createAndAddFieldset(famName = '') {
+    const fid = this.formId;
     const fieldset = document.createElement('fieldset');
 
     fieldset.appendChild(document.createElement('legend'));
@@ -33,79 +66,115 @@ class FormAssemblor {
     else
       fieldset.firstElementChild.textContent = `Postać${famName}:`;
     
-    let lab = document.createElement('label');
-    lab.appendChild(document.createElement('span'));
-    lab.firstElementChild.textContent = `Wybierz imię${famName}:`
-    lab.appendChild(document.createElement('input'));
-    lab.children[1].setAttribute('type', 'text');
-    lab.children[1].setAttribute('minlength', '2');
-    lab.children[1].setAttribute('maxlenght', '64');
-    fieldset.appendChild(lab);
+    fieldset.innerHTML += 
+      `
+        <label>
+          <span>Wybierz imię${famName}:</span>
+          <input id="name-${fid}" required type="text" minlength="2" maxlength="64">
+        </label>
+      `;
 
-    lab = document.createElement('label');
-    lab.appendChild(document.createElement('span'));
-    lab.firstElementChild.textContent = `Wybierz wzrost${famName} (cm):`;
-    lab.appendChild(document.createElement('input'));
-    lab.children[1].setAttribute('type', 'range');
-    lab.children[1].setAttribute('min', '52');
-    lab.children[1].setAttribute('max', '272');
-    fieldset.appendChild(lab);
+    fieldset.innerHTML +=
+      `
+        <label>
+          <span>Wybierz wzrost${famName} (cm):</span>
+          <div class="range-container">
+            <span></span>
+            <input id="height-${fid}" type="range" min="52" max="272">
+          </div>
+        </label>
+      `;
 
-    lab = document.createElement('label');
-    lab.appendChild(document.createElement('span'));
-    lab.firstElementChild.textContent = `Wybierz wagę${famName} (cm):`;
-    lab.appendChild(document.createElement('input'));
-    lab.children[1].setAttribute('type', 'range');
-    lab.children[1].setAttribute('min', '5');
-    lab.children[1].setAttribute('max', '570');
-    fieldset.appendChild(lab);
+    fieldset.innerHTML +=
+      `     
+        <label>
+          <span>Wybierz wagę${famName} (kg):</span>
+          <div class="range-container">
+            <span></span>
+            <input id="weight-${fid}" type="range" min="5" max="570">
+          </div>
+        </label>
+      `;
 
-    lab = document.createElement('label');
-    lab.appendChild(document.createElement('span'));
-    if(famName === '')
-      lab.firstElementChild.textContent = `Wybierz wiek (lata):`;
-    else
-      lab.firstElementChild.textContent = `Wybierz wiek (śmierci)${famName} (lata):`;
-    lab.appendChild(document.createElement('input'));
-    lab.children[1].setAttribute('type', 'range');
-    lab.children[1].setAttribute('min', '0');
-    lab.children[1].setAttribute('max', '122');
-    fieldset.appendChild(lab);
+    fieldset.innerHTML +=
+      `
+        <label>
+          <span>${famName === '' ? 'Wybierz wiek (lata):' : 'Wybierz wiek (śmierci)' + famName + ' (lata)'}</span>
+          <div class="range-container">
+            <span></span>
+            <input id="age-${fid}" type="range" min="0" max="122">
+          </div>
+        </label>
+      `;
 
-    lab = document.createElement('label');
-    lab.appendChild(document.createElement('span'));
-    lab.firstElementChild.textContent = `Wybierz datę urodzenia${famName} (rok jest ignorowany):`;
-    lab.appendChild(document.createElement('input'));
-    lab.children[1].setAttribute('type', 'date');
-    fieldset.appendChild(lab);
+    fieldset.innerHTML +=
+    `
+      <label>
+        <span>Wybierz długość włosów${famName} (cm):</span>
+        <div class="range-container">
+          <span></span>
+          <input id="hair-length-${fid}" type="range" min="0" max="563">
+        </div>
+      </label>
+    `;
 
-    lab = document.createElement('label');
-    lab.appendChild(document.createElement('span'));
-    lab.firstElementChild.textContent = `Wybierz rasę${famName}:`;
-    lab.appendChild(document.createElement('select'));
-    lab.children[1].innerHTML = 
-      `<option>europeidalna</option>
-      <option>afrykańska</option>
-      <option>azjatycka</option>
-      <option>australijska</option>
-      <option>malezyjska</option>
-      <option>indyjska</option>
-      <option>amerykańska</option>
-      <option>polinezyjska</option>
-      <option>mikronezyjska</option>`;
-    fieldset.appendChild(lab);
+    fieldset.innerHTML +=
+      `
+        <label>
+          <span>Wybierz datę urodzenia${famName} (rok jest ignorowany):</span>
+          <input required id="birthday-${fid}" type="date" value="0001-01-01">
+        </label>
+      `;
 
-    lab = document.createElement('label');
-    lab.appendChild(document.createElement('span'));
-    lab.firstElementChild.textContent = `Wybierz kolor włosów${famName}:`;
-    lab.appendChild(this.baseColorSelect.cloneNode(true));
-    fieldset.appendChild(lab);
+    fieldset.innerHTML +=
+      `
+        <label>
+          <span>Wybierz rasę${famName}:</span>
+          <select id="race-${fid}">
+            <option>europeidalna</option>
+            <option>afrykańska</option>
+            <option>azjatycka</option>
+            <option>australijska</option>
+            <option>malezyjska</option>
+            <option>indyjska</option>
+            <option>amerykańska</option>
+            <option>polinezyjska</option>
+            <option>mikronezyjska</option>
+          </select>
+        </label>
+      `;
 
-    lab = document.createElement('label');
-    lab.appendChild(document.createElement('span'));
-    lab.firstElementChild.textContent = `Wybierz kolor oczu${famName}:`;
-    lab.appendChild(this.baseColorSelect.cloneNode(true));
-    fieldset.appendChild(lab);
+    fieldset.innerHTML += 
+      `
+        <label>
+          <span>Wybierz kolor włosów${famName}:</span>
+        </label>
+      `;
+    fieldset.lastElementChild.appendChild(this.baseColorSelect.cloneNode(true));
+    fieldset.lastElementChild.lastElementChild.id = `hair-color-${fid}`;
+
+    fieldset.innerHTML += 
+      `
+        <label>
+          <span>Wybierz kolor oczu${famName}:</span>
+        </label>
+      `;
+    fieldset.lastElementChild.appendChild(this.baseColorSelect.cloneNode(true));
+    fieldset.lastElementChild.lastElementChild.id = `eye-color-${fid}`;
+
+    this.advancedButton.insertAdjacentElement('beforebegin', fieldset);
+
+    const ranges = document.querySelectorAll('input[type="range"]');
+    for(let val of ranges) {
+      let min = parseInt(val.getAttribute('min'));
+      let max = parseInt(val.getAttribute('max'));
+      val.value = Math.floor(Math.random() * (max - min)) + min;
+
+      val.addEventListener('input', () => {
+        val.previousElementSibling.textContent = val.value;
+      });
+      val.previousElementSibling.textContent = val.value;
+    }
   }
 
 }

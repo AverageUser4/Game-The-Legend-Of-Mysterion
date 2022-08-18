@@ -28,39 +28,59 @@ button:hover {
   background-origin: content-box;
 }
 
+.website-wrapper {
+  padding-bottom: 80px;
+}
+
 label {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 150px;
-  height: 40px;
   padding: 6px 0;
 }
 
 fieldset {
   border-color: #BC9645;
+  margin-bottom: 50px;
+  width: 905px;
 }
 
-[type=submit], [type=text], [type=date], select {
+[type=submit], [type=text], [type=date], button, select {
   padding: 0 16px;
   height: 40px;
-  width: 300px;
+  width: 200px;
   box-sizing: border-box;
   border: 3px solid #BC9645;
   background-color: #111;
   color: #BC9645;
   font-size: 1.2rem;
 }
-[type=submit]:hover, [type=text]:hover, [type=date]:hover, select:hover {
+[type=submit]:hover, [type=text]:hover, [type=date]:hover, button:hover, select:hover {
   cursor: pointer;
   background-color: #222;
 }
 
-[type=range] {
-  width: 300px;
+#show-as-binary-button {
+  height: auto;
+  width: auto;
 }
 
-[type=submit] {
+.range-container {
+  position: relative;
+}
+.range-container > span {
+  position: absolute;
+  top: -12px;
+  right: 30px;
+  pointer-events: none;
+}
+
+[type=range] {
+  width: 200px;
+}
+
+[type=submit], .advanced-button {
   display: block;
   width: 100%;
   margin-top: 12px;
@@ -70,6 +90,13 @@ fieldset {
   display: flex;
   justify-content: space-between;
   gap: 20px;
+}
+
+.character-info {
+  word-break: break-all;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /*# sourceMappingURL=character-creation-main.css.map */

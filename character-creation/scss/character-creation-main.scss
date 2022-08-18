@@ -1,23 +1,28 @@
 @use '../../shared/scss/global';
 @use '../../shared/scss/var';
 
+.website-wrapper {
+  padding-bottom: 80px;
+}
+
 label {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 150px;
-  height: 40px;
   padding: 6px 0;
 }
 
 fieldset {
   border-color: var.$main-font-color;
+  margin-bottom: 50px;
+  width: 905px;
 }
 
-[type=submit], [type=text], [type=date], select {
+[type=submit], [type=text], [type=date], button, select {
   padding: 0 16px;
   height: 40px;
-  width: 300px;
+  width: 200px;
   box-sizing: border-box;
   border: 3px solid var.$main-font-color;
   background-color: #111;
@@ -29,11 +34,26 @@ fieldset {
   font-size: 1.2rem;
 }
 
-[type=range] {
-  width: 300px;
+#show-as-binary-button {
+  height: auto;
+  width: auto;
 }
 
-[type=submit] {
+.range-container {
+  position: relative;
+  & > span {
+    position: absolute;
+    top: -12px;
+    right: 30px;
+    pointer-events: none;
+  }
+}
+
+[type=range] {
+  width: 200px;
+}
+
+[type=submit], .advanced-button {
   display: block;
   width: 100%;
   margin-top: 12px;
@@ -43,4 +63,11 @@ fieldset {
   display: flex;
   justify-content: space-between;
   gap: 20px;
+}
+
+.character-info {
+  word-break: break-all;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

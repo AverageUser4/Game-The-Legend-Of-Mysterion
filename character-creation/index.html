@@ -28,83 +28,31 @@
     <main class="the-main">
   
       <form class="the-form">
-  
-        <fieldset>
 
-          <legend>Twoja postać:</legend>
-
-          <label>
-            <span>Wybierz imię:</span>
-            <input type="text" minlength="2" maxlength="64">
-          </label>
-
-          <label>
-            <span>Wybierz wzrost (cm):</span>
-            <input type="range" min="52" max="272">
-          </label>
-
-          <label>
-            <span>Wybierz wagę (kg):</span>
-            <input type="range" min="5" max="570">
-          </label>
-
-          <label>
-            <span>Wybierz wiek:</span>
-            <input type="range" min="0" max="122">
-          </label>
-
-          <label>
-            <span>Wybierz datę urodzenia (rok jest ignorowany):</span>
-            <input type="date">
-          </label>
-
-          <label>
-            <span>Wybierz rasę:</span>
-            <select>
-              <option>europeidalna</option>
-              <option>afrykańska</option>
-              <option>azjatycka</option>
-              <option>australijska</option>
-              <option>malezyjska</option>
-              <option>indyjska</option>
-              <option>amerykańska</option>
-              <option>polinezyjska</option>
-              <option>mikronezyjska</option>
-            </select>
-          </label>
-
-          <label>
-            <span>Wybierz kolor włosów:</span>
-            <select class="color-select"></select>
-          </label>
-
-          <label>
-            <span>Wybierz kolor oczu:</span>
-            <select class="color-select"></select>
-          </label>
-
-        </fieldset>
-
-        <input type="submit" value="Stwórz">
+        <button type="button" class="advanced-button">Zaawansowane...</button>
+        <input class="the-submit" type="submit" value="Stwórz">
 
       </form>
       
-      <div>
+      <div class="character-info">
 
-        <div>Twoje imię: <span></span></div>
-        <div>Twoje UUID: <span></span></div>
-        <div>Twoja nazwa użytkownika: <span></span></div>
+        <div id="info-name">Twoje imię: <span></span></div>
+        <div id="info-uuid">Twoje UUID: <span></span> <button id="show-as-binary-button">Pokaż binarnie</button></button></div>
+        <div id="info-username">Twoja nazwa użytkownika: <span></span></div>
 
-        <div>Twój wzrost: <span></span></div>
-        <div>Twoja waga: <span></span></div>
-        <div>Twoje BMI: <span></span></div>
+        <div id="info-height">Twój wzrost: <span></span></div>
+        <div id="info-weight">Twoja waga: <span></span></div>
+        <div id="info-bmi">Twoje BMI: <span></span></div>
 
-        <div>Twój wiek: <span></span></div>
-        <div>Twoja data urodzenia: <span></span></div>
+        <div id="info-age">Twój wiek: <span></span></div>
+        <div id="info-birthday">Twoja data urodzenia: <span></span></div>
 
-        <div>Twoja rasa: <span></span></div>
-        <div>Twój kolor włosów: <span></span></div>
-        <div>Twój kolor oczu: <span></span></div>
+        <div id="info-race">Twoja rasa: <span></span></div>
+        <div id="info-hair-color">Twój kolor włosów: <span></span></div>
+        <div id="info-hair-length">Twoja długość włosów: <span></span></div>
+        <div id="info-eye-color">Twój kolor oczu: <span></span></div>
+
+        <div id="info-family-tree">Twoje drzewo genealogincze: <span></span></div>
 
       </div>
 

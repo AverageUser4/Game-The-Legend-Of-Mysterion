@@ -2,7 +2,7 @@
 
 class UUIDor {
 
-  static getUUID(binary = false) {
+  static createUUID(binary = false) {
     let uuid = '';
 
     for(let i = 1; i <= 32; i++) {
