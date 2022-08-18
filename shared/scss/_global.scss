@@ -1,0 +1,33 @@
+@use 'var';
+
+body {
+  margin: 0;
+  background-color: var.$main-background-color;
+  color: var.$main-font-color;
+}
+
+button {
+  &:hover {
+    cursor: pointer;
+  }  
+}
+
+.website-wrapper {
+  width: 1400px;
+  margin: auto;
+}
+@media (max-width: 1440px) {
+  .website-wrapper {
+    padding: 0 40px;
+  }
+}
+
+.the-header {
+  height: 132px;
+  box-sizing: border-box;
+  padding: 16px;
+  background-image: url('../../shared/resources/images/legend.jpeg');
+  background-size: 100px 100px;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+}

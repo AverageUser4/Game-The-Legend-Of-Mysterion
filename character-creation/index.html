@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html lang="pl">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Legend of Mysterion - Character Creation</title>
+  <link rel="icon" href="../shared/resources/images/legend.jpeg">
+  <link rel="stylesheet" href="css/character-creation-main.css">
+  <script defer src="js/classes/FormAssemblor.js"></script>
+  <script defer src="js/classes/Formor.js"></script>
+  <script defer src="js/classes/UUIDor.js"></script>
+  <script defer src="js/main.js"></script>
+
+</head>
+
+<body>
+
+  <div class="website-wrapper">
+
+    <header class="the-header"></header>
+
+    <h1>Kreator postaci:</h1>
+
+    <main class="the-main">
+  
+      <form class="the-form">
+  
+        <fieldset>
+
+          <legend>Twoja postać:</legend>
+
+          <label>
+            <span>Wybierz imię:</span>
+            <input type="text" minlength="2" maxlength="64">
+          </label>
+
+          <label>
+            <span>Wybierz wzrost (cm):</span>
+            <input type="range" min="52" max="272">
+          </label>
+
+          <label>
+            <span>Wybierz wagę (kg):</span>
+            <input type="range" min="5" max="570">
+          </label>
+
+          <label>
+            <span>Wybierz wiek:</span>
+            <input type="range" min="0" max="122">
+          </label>
+
+          <label>
+            <span>Wybierz datę urodzenia (rok jest ignorowany):</span>
+            <input type="date">
+          </label>
+
+          <label>
+            <span>Wybierz rasę:</span>
+            <select>
+              <option>europeidalna</option>
+              <option>afrykańska</option>
+              <option>azjatycka</option>
+              <option>australijska</option>
+              <option>malezyjska</option>
+              <option>indyjska</option>
+              <option>amerykańska</option>
+              <option>polinezyjska</option>
+              <option>mikronezyjska</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Wybierz kolor włosów:</span>
+            <select class="color-select"></select>
+          </label>
+
+          <label>
+            <span>Wybierz kolor oczu:</span>
+            <select class="color-select"></select>
+          </label>
+
+        </fieldset>
+
+        <input type="submit" value="Stwórz">
+
+      </form>
+      
+      <div>
+
+        <div>Twoje imię: <span></span></div>
+        <div>Twoje UUID: <span></span></div>
+        <div>Twoja nazwa użytkownika: <span></span></div>
+
+        <div>Twój wzrost: <span></span></div>
+        <div>Twoja waga: <span></span></div>
+        <div>Twoje BMI: <span></span></div>
+
+        <div>Twój wiek: <span></span></div>
+        <div>Twoja data urodzenia: <span></span></div>
+
+        <div>Twoja rasa: <span></span></div>
+        <div>Twój kolor włosów: <span></span></div>
+        <div>Twój kolor oczu: <span></span></div>
+
+      </div>
+
+    </main>
+
+  </div>
+  
+</body>
+
+</html>

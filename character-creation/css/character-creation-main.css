@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  background-color: #00043B;
+  color: #BC9645;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.website-wrapper {
+  width: 1400px;
+  margin: auto;
+}
+
+@media (max-width: 1440px) {
+  .website-wrapper {
+    padding: 0 40px;
+  }
+}
+.the-header {
+  height: 132px;
+  box-sizing: border-box;
+  padding: 16px;
+  background-image: url("../../shared/resources/images/legend.jpeg");
+  background-size: 100px 100px;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 150px;
+  height: 40px;
+  padding: 6px 0;
+}
+
+fieldset {
+  border-color: #BC9645;
+}
+
+[type=submit], [type=text], [type=date], select {
+  padding: 0 16px;
+  height: 40px;
+  width: 300px;
+  box-sizing: border-box;
+  border: 3px solid #BC9645;
+  background-color: #111;
+  color: #BC9645;
+  font-size: 1.2rem;
+}
+[type=submit]:hover, [type=text]:hover, [type=date]:hover, select:hover {
+  cursor: pointer;
+  background-color: #222;
+}
+
+[type=range] {
+  width: 300px;
+}
+
+[type=submit] {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.the-main {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/*# sourceMappingURL=character-creation-main.css.map */

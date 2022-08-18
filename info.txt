@@ -1,1 +1,10 @@
 THE LEGEND OF MYSTERION - RETURN OF THE GOLDEN AGE
+
+Ogólne:
+  - gra jest dostępna online, ale większość zasobów (zdjęć) jest kradziona z innych serwerów
+  - postęp gry jest przechowywany przy użyciu localStorage
+  - interaktywna gra jest w canvas'ie po środku, ui jest w okół niego
+
+
+Systemy:
+  - 

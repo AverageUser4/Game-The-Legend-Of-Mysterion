@@ -1,0 +1,46 @@
+@use '../../shared/scss/global';
+@use '../../shared/scss/var';
+
+label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 150px;
+  height: 40px;
+  padding: 6px 0;
+}
+
+fieldset {
+  border-color: var.$main-font-color;
+}
+
+[type=submit], [type=text], [type=date], select {
+  padding: 0 16px;
+  height: 40px;
+  width: 300px;
+  box-sizing: border-box;
+  border: 3px solid var.$main-font-color;
+  background-color: #111;
+  color: var.$main-font-color;
+  &:hover {
+    cursor: pointer;
+    background-color: #222;
+  }
+  font-size: 1.2rem;
+}
+
+[type=range] {
+  width: 300px;
+}
+
+[type=submit] {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.the-main {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
