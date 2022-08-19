@@ -14,26 +14,32 @@ class FormAssemblor {
 
   constructor() {
     this.advancedButton = document.querySelector('.advanced-button');
-
-    fetch('resources/data/colors-polish.json')
-      .then((response) => response.json())
-      .then((data) => this.colorsSetUp(data));
   }
 
-  colorsSetUp(data) {
-    this.baseColorSelect = document.createElement('select');
+  setUp() {
+    return new Promise(
+      (resolve) => {
+        fetch('resources/data/colors-polish.json')
+        .then((response) => response.json())
+        .then((data) => {
+          this.baseColorSelect = document.createElement('select');
 
-    for(let val of data) {
-      const opt = document.createElement('option');
-      opt.textContent = val;
-      this.baseColorSelect.appendChild(opt);
-    }
-
-    this.createAndAddFieldset();
-    this.createAndAddFieldset(' ojca');
-    this.createAndAddFieldset(' matki');
-
-    this.advancedButton.addEventListener('click', () => this.applyAdvanced());
+          for(let i = 0; i < data.length; i++) {
+            const opt = document.createElement('option');
+            opt.textContent = data[i];
+            opt.value = i;
+            this.baseColorSelect.appendChild(opt);
+          }
+      
+          this.createAndAddFieldset();
+          this.createAndAddFieldset(' ojca');
+          this.createAndAddFieldset(' matki');
+      
+          this.advancedButton.addEventListener('click', () => this.applyAdvanced());
+          resolve();
+        });
+      }
+    )
   }
 
   applyAdvanced() {
@@ -48,11 +54,31 @@ class FormAssemblor {
       return;
     }
 
-    this.createAndAddFieldset(` ${'pra-'.repeat(this.prependixCount + 1)}dziadka ze strony ${'pra-'.repeat(this.prependixCount)}dziadka`);
-    this.createAndAddFieldset(` ${'pra-'.repeat(this.prependixCount + 1)}babki ze strony ${'pra-'.repeat(this.prependixCount)}dziadka`);
-    this.createAndAddFieldset(` ${'pra-'.repeat(this.prependixCount + 1)}dziadka ze strony ${'pra-'.repeat(this.prependixCount)}babki`);
-    this.createAndAddFieldset(` ${'pra-'.repeat(this.prependixCount + 1)}babki ze strony ${'pra-'.repeat(this.prependixCount)}babki`);
+    /*
+      prependixCount = 0:
+        pra-dziadka-1
+        pra-babki-1
+        pra-dziadka-2
+        pra-babki-2
+    */
+
+    for(let i = 1; i <= 2 ** (this.prependixCount + 1); i++) {
+      this.createAndAddFieldset(` ${'pra-'.repeat(this.prependixCount)}dziadka-${i}`);
+      this.createAndAddFieldset(` ${'pra-'.repeat(this.prependixCount)}babki-${i}`);
+    }
     this.prependixCount++;
+  }
+
+  randomName() {
+    const letters = 'abcdefghijklmnoprstuvwxyz';
+    let name = letters.charAt(Math.floor(Math.random() * letters.length));
+    name = name.toUpperCase();
+
+    const len = Math.floor(Math.random() * 7) + 3;
+    for(let i = 0; i < len; i++)
+      name += letters.charAt(Math.floor(Math.random() * letters.length));
+    
+    return name;
   }
 
   // famName ' matki', ' babki (ze strony ojca)', itd.
@@ -70,9 +96,17 @@ class FormAssemblor {
       `
         <label>
           <span>Wybierz imię${famName}:</span>
-          <input id="name-${fid}" required type="text" minlength="2" maxlength="64">
+          <input required value="${this.randomName()}" id="name-${fid}" type="text" minlength="2" maxlength="64">
         </label>
       `;
+
+    fieldset.innerHTML += 
+    `
+      <label>
+        <span>UUID${famName}:</span>
+        <input disabled value="${UUIDor.createUUID()}" id="uuid-${fid}" required type="text" minlength="2" maxlength="64">
+      </label>
+    `;
 
     fieldset.innerHTML +=
       `
@@ -118,11 +152,16 @@ class FormAssemblor {
       </label>
     `;
 
+    let date = '0001-';
+    date += (Math.floor(Math.random() * 12) + 1).toString().padStart(2, 0);
+    date += '-'
+    date += (Math.floor(Math.random() * 28) + 1).toString().padStart(2, 0);
+
     fieldset.innerHTML +=
       `
         <label>
           <span>Wybierz datę urodzenia${famName} (rok jest ignorowany):</span>
-          <input required id="birthday-${fid}" type="date" value="0001-01-01">
+          <input required id="birthday-${fid}" type="date" value="${date}">
         </label>
       `;
 
@@ -131,18 +170,20 @@ class FormAssemblor {
         <label>
           <span>Wybierz rasę${famName}:</span>
           <select id="race-${fid}">
-            <option>europeidalna</option>
-            <option>afrykańska</option>
-            <option>azjatycka</option>
-            <option>australijska</option>
-            <option>malezyjska</option>
-            <option>indyjska</option>
-            <option>amerykańska</option>
-            <option>polinezyjska</option>
-            <option>mikronezyjska</option>
+            <option value="0">europeidalna</option>
+            <option value="1">afrykańska</option>
+            <option value="2">azjatycka</option>
+            <option value="3">australijska</option>
+            <option value="4">malezyjska</option>
+            <option value="5">indyjska</option>
+            <option value="6">amerykańska</option>
+            <option value="7">polinezyjska</option>
+            <option value="8">mikronezyjska</option>
           </select>
         </label>
       `;
+
+    fieldset.lastElementChild.children[1].children[Math.floor(Math.random() * 9)].setAttribute('selected', '');
 
     fieldset.innerHTML += 
       `
@@ -150,7 +191,9 @@ class FormAssemblor {
           <span>Wybierz kolor włosów${famName}:</span>
         </label>
       `;
-    fieldset.lastElementChild.appendChild(this.baseColorSelect.cloneNode(true));
+    let sel = this.baseColorSelect.cloneNode(true);
+    sel.children[Math.floor(Math.random() * sel.children.length)].setAttribute('selected', '');
+    fieldset.lastElementChild.appendChild(sel);
     fieldset.lastElementChild.lastElementChild.id = `hair-color-${fid}`;
 
     fieldset.innerHTML += 
@@ -159,13 +202,17 @@ class FormAssemblor {
           <span>Wybierz kolor oczu${famName}:</span>
         </label>
       `;
-    fieldset.lastElementChild.appendChild(this.baseColorSelect.cloneNode(true));
+    sel = this.baseColorSelect.cloneNode(true);
+    sel.children[Math.floor(Math.random() * sel.children.length)].setAttribute('selected', '');
+    fieldset.lastElementChild.appendChild(sel);
     fieldset.lastElementChild.lastElementChild.id = `eye-color-${fid}`;
 
     this.advancedButton.insertAdjacentElement('beforebegin', fieldset);
 
     const ranges = document.querySelectorAll('input[type="range"]');
     for(let val of ranges) {
+      if(!fieldset.contains(val))
+        continue;
       let min = parseInt(val.getAttribute('min'));
       let max = parseInt(val.getAttribute('max'));
       val.value = Math.floor(Math.random() * (max - min)) + min;

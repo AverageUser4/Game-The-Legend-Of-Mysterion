@@ -1,7 +1,7 @@
 'use strict';
 
-const fa = new FormAssemblor();
+const formAssemblor = new FormAssemblor();
+const formor = new Formor();
 
-// formor is dependend on asynchronous request made by form assemblor
-let formor;
-setTimeout(() => formor = new Formor(), 500);
+formAssemblor.setUp()
+  .then(() => formor.setUp(formor));

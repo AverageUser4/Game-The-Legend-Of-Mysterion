@@ -3,16 +3,6 @@
 class Formor {
 
   constructor() {
-    this.name = document.querySelector('#name-1');
-    this.height = document.querySelector('#height-1');
-    this.weight = document.querySelector('#weight-1');
-    this.age = document.querySelector('#age-1');
-    this.birthday = document.querySelector('#birthday-1');
-    this.race = document.querySelector('#race-1');
-    this.hairColor = document.querySelector('#hair-color-1');
-    this.hairLength = document.querySelector('#hair-length-1');
-    this.eyeColor = document.querySelector('#eye-color-1');
-
     this.infoName = document.querySelector('#info-name').children[0];
     this.infoUUID = document.querySelector('#info-uuid').children[0];
     this.infoUsername = document.querySelector('#info-username').children[0];
@@ -26,28 +16,91 @@ class Formor {
     this.infoHairLength = document.querySelector('#info-hair-length').children[0];
     this.infoEyeColor = document.querySelector('#info-eye-color').children[0];
     this.infoFamilyTree = document.querySelector('#info-family-tree').children[0];
-
     this.showAsBinaryButton = document.querySelector('#show-as-binary-button');
+  }
 
-    this.infoUUID.textContent = UUIDor.createUUID();
-    this.showAsBinaryButton.addEventListener('click', () => {
-      if(this.infoUUID.textContent.length < 40) {
-        this.infoUUID.textContent = UUIDor.hexToBin(this.infoUUID.textContent);
-        this.showAsBinaryButton.textContent = 'Pokaż heksadecymalnie';
+  setUp(that) {
+    that.name = document.querySelector('#name-1');
+    that.height = document.querySelector('#height-1');
+    that.weight = document.querySelector('#weight-1');
+    that.age = document.querySelector('#age-1');
+    that.birthday = document.querySelector('#birthday-1');
+    that.race = document.querySelector('#race-1');
+    that.hairColor = document.querySelector('#hair-color-1');
+    that.hairLength = document.querySelector('#hair-length-1');
+    that.eyeColor = document.querySelector('#eye-color-1');
+
+    that.infoUUID.textContent = UUIDor.createUUID();
+    that.showAsBinaryButton.addEventListener('click', () => {
+      if(that.infoUUID.textContent.length < 40) {
+        that.infoUUID.textContent = UUIDor.hexToBin(that.infoUUID.textContent);
+        that.showAsBinaryButton.textContent = 'Pokaż heksadecymalnie';
       } else {
-        this.infoUUID.textContent = UUIDor.binToHex(this.infoUUID.textContent);
-        this.showAsBinaryButton.textContent = 'Pokaż binarnie';
+        that.infoUUID.textContent = UUIDor.binToHex(that.infoUUID.textContent);
+        that.showAsBinaryButton.textContent = 'Pokaż binarnie';
       }
-
-      this.nameChange();
+      that.nameChange();
     });
 
-    this.name.addEventListener('change', () => this.nameChange());
-    this.height.addEventListener('change', () => this.heightChange());
-    this.weight.addEventListener('change', () => this.weightChange());
+    that.name.addEventListener('change', () => that.nameChange());
+    that.height.addEventListener('change', () => that.heightChange());
+    that.weight.addEventListener('change', () => that.weightChange());
+    that.age.addEventListener('change', () => that.ageChange());
+    that.birthday.addEventListener('change', () => that.birthdayChange());
+    that.race.addEventListener('change', () => that.raceChange());
+    that.hairColor.addEventListener('change', () => that.hairColorChange());
+    that.hairLength.addEventListener('change', () => that.hairLengthChange());
+    that.eyeColor.addEventListener('change', () => that.eyeColorChange());
 
-    this.heightChange();
-    this.weightChange();
+    document.querySelector('.advanced-button').addEventListener('click', 
+      () => setTimeout(
+        () => that.updateFamilyTree(), 1000)
+    );
+
+    that.nameChange();
+    that.heightChange();
+    that.weightChange();
+    that.ageChange();
+    that.birthdayChange();
+    that.raceChange();
+    that.hairColorChange();
+    that.hairLengthChange();
+    that.eyeColorChange();
+    that.updateFamilyTree();
+  }
+
+  updateFamilyTree() {
+    const allNames = document.querySelectorAll('[id^="name-"]');
+    this.infoFamilyTree.textContent = '[';
+    for(let val of allNames) {
+      this.infoFamilyTree.textContent += val.value + ',';
+    }
+    this.infoFamilyTree.textContent = this.infoFamilyTree.textContent.slice(0, this.infoFamilyTree.textContent.length - 1);
+    this.infoFamilyTree.textContent += ']';
+  }
+
+  hairColorChange() {
+    this.infoHairColor.textContent = this.hairColor.children[this.hairColor.value].textContent;
+  }
+
+  hairLengthChange() {
+    this.infoHairLength.textContent = this.hairLength.value + ' (cm)';
+  }
+
+  eyeColorChange() {
+    this.infoEyeColor.textContent = this.eyeColor.children[this.eyeColor.value].textContent;
+  }
+
+  raceChange() {
+    this.infoRace.textContent = this.race.children[this.race.value].textContent;
+  }
+
+  birthdayChange() {
+    this.infoBirthday.textContent = this.birthday.value.slice(5);
+  }
+
+  ageChange() {
+    this.infoAge.textContent = this.age.value + ' (years)';
   }
 
   nameChange() {
@@ -56,12 +109,12 @@ class Formor {
   }
 
   heightChange() {
-    this.infoHeight.textContent = this.height.value;
+    this.infoHeight.textContent = this.height.value + ' (cm)';
     this.updateBMI();
   }
 
   weightChange() {
-    this.infoWeight.textContent = this.weight.value;
+    this.infoWeight.textContent = this.weight.value + ' (kg)';
     this.updateBMI();
   }
 
