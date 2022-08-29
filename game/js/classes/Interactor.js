@@ -5,6 +5,9 @@ const interactor = {
   pressedKeys: new Set(),
 
   keyDown(e) {
+    if(e.key === ' ')
+      e.preventDefault();
+      
     this.pressedKeys.add(e.key);
   },
 
