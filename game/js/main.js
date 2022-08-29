@@ -1,18 +1,50 @@
 'use strict';
 
-const cinematicor = new Cinematicor();
-const progressor = new Progressor();
-const canvasor = new Canvasor();
+class Mainor {
 
-if(progressor.getQuestId() === 0) {
-  const xhr = new XMLHttpRequest();
+  static hasInstance = false;
 
-  xhr.onload = () => {
-    const introContent = JSON.parse(xhr.responseText);
-    cinematicor.startCinematic(introContent);
-    progressor.setQuestId(1);
-  };
+  levelor;
 
-  xhr.open('GET', 'resources/cinematics/game-intro.json');
-  xhr.send();
+  constructor() {
+    if(Mainor.hasInstance)
+      throw new Error('Mainor can have only one instance.');
+
+    Mainor.hasInstance = true;
+
+    if(!localStorage.getItem('watchedIntro')) {
+      fetch('resources/cinematics/game-intro.json')
+        .then((response) => response.json())
+        .then((json) => {
+          cinematicor.eventTarget.addEventListener('CinematicEnded', 
+            () => this.onCinematicEnded());
+          cinematicor.startCinematic(json);
+          localStorage.setItem('watchedIntro', 'true');
+        });
+    } else {
+      this.onCinematicEnded();
+    }
+
+  }
+
+  onCinematicEnded() {
+    this.levelor = new Levelor();
+    setInterval(() => this.gameLoop(), 33);    
+  }
+
+  gameLoop() {
+    if(this.levelor.ready) {
+      this.levelor.gameLoopIteration();
+      if(this.levelor.changeMap) {
+        this.levelor = new Levelor(
+          this.levelor.changeMap.newMap,
+          this.levelor.changeMap.difficulty,
+          this.levelor.changeMap.startOnEnd,
+        );
+      }
+    }
+  }
+
 }
+
+const mainor = new Mainor();

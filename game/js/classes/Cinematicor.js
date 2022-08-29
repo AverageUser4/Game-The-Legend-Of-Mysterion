@@ -2,25 +2,25 @@
 
 class Cinematicor {
 
-  abortController;
+  static hasInstance = false;
 
-  cinematicContainer;
-  imgTag;
-  mediaContainer;
-  textButton;
-  skipButton;
+  cinematicContainer = document.querySelector('.cinematic');
+  mediaContainer = document.querySelector('.cinematic__media-container');
+  textButton = document.querySelector('.cinematic__text-button');
+  skipButton = document.querySelector('.cinematic__skip-button');
+  imgTag = document.querySelector('.cinematic__media');
 
   cinematicData;
   polishVoice;
 
-  constructor() {
-    this.cinematicContainer = document.querySelector('.cinematic');
-    this.mediaContainer = document.querySelector('.cinematic__media-container');
-    this.textButton = document.querySelector('.cinematic__text-button');
-    this.skipButton = document.querySelector('.cinematic__skip-button');
-    this.imgTag = document.querySelector('.cinematic__media');
+  abortController = new AbortController();
+  eventTarget = new Image();
 
-    this.abortController = new AbortController();
+  constructor() {
+    if(Cinematicor.hasInstance)
+      throw new Error(`Use global 'cinematicor' object provided with Cinematicor.js file.`);
+
+    Cinematicor.hasInstance = true;
 
     this.setVoiceLanguage();
     speechSynthesis.addEventListener('voiceschanged', () => this.setVoiceLanguage());
@@ -82,5 +82,9 @@ class Cinematicor {
     this.abortController.abort();
     document.body.style.overflow = 'auto';
     this.cinematicContainer.style.display = 'none';
+
+    this.eventTarget.dispatchEvent(new Event('CinematicEnded'));
   }
 }
+
+const cinematicor = new Cinematicor();

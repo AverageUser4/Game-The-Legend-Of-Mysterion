@@ -3,6 +3,11 @@
 class Formor {
 
   constructor() {
+    this.form = document.querySelector('.the-form');
+    this.form.addEventListener('submit', (e) => this.onSubmit(e));
+
+    this.showAsBinaryButton = document.querySelector('#show-as-binary-button');
+
     this.infoName = document.querySelector('#info-name').children[0];
     this.infoUUID = document.querySelector('#info-uuid').children[0];
     this.infoUsername = document.querySelector('#info-username').children[0];
@@ -16,11 +21,11 @@ class Formor {
     this.infoHairLength = document.querySelector('#info-hair-length').children[0];
     this.infoEyeColor = document.querySelector('#info-eye-color').children[0];
     this.infoFamilyTree = document.querySelector('#info-family-tree').children[0];
-    this.showAsBinaryButton = document.querySelector('#show-as-binary-button');
   }
 
   setUp(that) {
     that.name = document.querySelector('#name-1');
+    that.uuid = document.querySelector('#uuid-1');
     that.height = document.querySelector('#height-1');
     that.weight = document.querySelector('#weight-1');
     that.age = document.querySelector('#age-1');
@@ -30,7 +35,7 @@ class Formor {
     that.hairLength = document.querySelector('#hair-length-1');
     that.eyeColor = document.querySelector('#eye-color-1');
 
-    that.infoUUID.textContent = UUIDor.createUUID();
+    that.infoUUID.textContent = that.uuid.value;
     that.showAsBinaryButton.addEventListener('click', () => {
       if(that.infoUUID.textContent.length < 40) {
         that.infoUUID.textContent = UUIDor.hexToBin(that.infoUUID.textContent);
@@ -69,6 +74,66 @@ class Formor {
     that.updateFamilyTree();
   }
 
+  onSubmit(e) {
+    e.preventDefault();
+
+    /*
+      1 - player
+      2 - father
+      3 - mother
+      4 - grandfather-1
+      5 - grandmother-1
+      6 - grandfather-2
+      7 - grandmother-2
+      8 - great grandfather-1...
+    */
+
+    let i = 0;
+    while(++i <= Number.MAX_SAFE_INTEGER) {
+
+      const nameBuf = document.querySelector(`#name-${i}`);
+      if(!nameBuf)
+        break;
+
+      const name = nameBuf.value;
+
+      const uuid = document.querySelector(`#uuid-${i}`).value;
+      const height = document.querySelector(`#height-${i}`).value;
+      const weight = document.querySelector(`#weight-${i}`).value;
+      const hairLength = document.querySelector(`#hair-length-${i}`).value;
+      const age = document.querySelector(`#age-${i}`).value;
+      const birthday = document.querySelector(`#birthday-${i}`).value.slice(5);
+
+      const raceBuf = document.querySelector(`#race-${i}`);
+      const race = raceBuf.children[raceBuf.value].textContent;
+
+      const hairColorBuf = document.querySelector(`#hair-color-${i}`);
+      const hairColor = hairColorBuf.children[hairColorBuf.value].textContent;
+  
+      const eyeColorBuf = document.querySelector(`#eye-color-${i}`);
+      const eyeColor = eyeColorBuf.children[eyeColorBuf.value].textContent;
+
+      const relation = document.querySelector(`#relation-${i}`).textContent;
+
+      localStorage.setItem(`name-${i}`, name);
+      localStorage.setItem(`uuid-${i}`, uuid);
+      localStorage.setItem(`username-${i}`, `${name}-${uuid}`);
+      localStorage.setItem(`height-${i}`, height);
+      localStorage.setItem(`weight-${i}`, weight);
+      localStorage.setItem(`hairLength-${i}`, hairLength);
+      localStorage.setItem(`age-${i}`, age);
+      localStorage.setItem(`birthday-${i}`, birthday);
+      localStorage.setItem(`race-${i}`, race);
+      localStorage.setItem(`hairColor-${i}`, hairColor);
+      localStorage.setItem(`eyeColor-${i}`, eyeColor);
+      localStorage.setItem(`relation-${i}`, relation)
+    }
+
+    localStorage.setItem('knownFamilySize', i - 1);
+    localStorage.setItem('createdCharacter', 'true');
+    document.location = '../game';
+  }
+
   updateFamilyTree() {
     const allNames = document.querySelectorAll('[id^="name-"]');
     this.infoFamilyTree.textContent = '[';
@@ -100,7 +165,7 @@ class Formor {
   }
 
   ageChange() {
-    this.infoAge.textContent = this.age.value + ' (years)';
+    this.infoAge.textContent = this.age.value + ' (lata)';
   }
 
   nameChange() {

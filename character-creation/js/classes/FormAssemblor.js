@@ -5,7 +5,7 @@ class FormAssemblor {
   form;
   advancedButton;
   baseColorSelect;
-  prependixCount = -1;
+  prependixCount = 0;
 
   formIdValue = 0;
   get formId() {
@@ -32,8 +32,8 @@ class FormAssemblor {
           }
       
           this.createAndAddFieldset();
-          this.createAndAddFieldset(' ojca');
-          this.createAndAddFieldset(' matki');
+          this.createAndAddFieldset(' ojca', 'ojciec');
+          this.createAndAddFieldset(' matki', 'matka');
       
           this.advancedButton.addEventListener('click', () => this.applyAdvanced());
           resolve();
@@ -45,14 +45,14 @@ class FormAssemblor {
   applyAdvanced() {
     this.advancedButton.textContent = 'Bardziej zaawansowane...';
 
-    if(this.prependixCount === -1) {
-      this.createAndAddFieldset(` dziadka ze strony ojca`);
-      this.createAndAddFieldset(` babki ze strony ojca`);
-      this.createAndAddFieldset(` dziadka ze strony matki`);
-      this.createAndAddFieldset(` babki ze strony matki`);
-      this.prependixCount++;
-      return;
-    }
+    // if(this.prependixCount === -1) {
+    //   this.createAndAddFieldset(` dziadka ze strony ojca`, 'dziadek ze strony ojca');
+    //   this.createAndAddFieldset(` babki ze strony ojca`, 'babka ze strony ojca');
+    //   this.createAndAddFieldset(` dziadka ze strony matki`, 'dziadek ze strony matki');
+    //   this.createAndAddFieldset(` babki ze strony matki`, 'babka ze strony matki');
+    //   this.prependixCount++;
+    //   return;
+    // }
 
     /*
       prependixCount = 0:
@@ -63,8 +63,12 @@ class FormAssemblor {
     */
 
     for(let i = 1; i <= 2 ** (this.prependixCount + 1); i++) {
-      this.createAndAddFieldset(` ${'pra-'.repeat(this.prependixCount)}dziadka-${i}`);
-      this.createAndAddFieldset(` ${'pra-'.repeat(this.prependixCount)}babki-${i}`);
+      this.createAndAddFieldset(
+        ` ${'pra-'.repeat(this.prependixCount)}dziadka-${i}`,
+        `${'pra-'.repeat(this.prependixCount)}dziadek-${i}`);
+      this.createAndAddFieldset(
+        ` ${'pra-'.repeat(this.prependixCount)}babki-${i}`,
+        `${'pra-'.repeat(this.prependixCount)}babka-${i}`);
     }
     this.prependixCount++;
   }
@@ -82,7 +86,7 @@ class FormAssemblor {
   }
 
   // famName ' matki', ' babki (ze strony ojca)', itd.
-  createAndAddFieldset(famName = '') {
+  createAndAddFieldset(famName = '', relation = 'ty') {
     const fid = this.formId;
     const fieldset = document.createElement('fieldset');
 
@@ -92,6 +96,11 @@ class FormAssemblor {
     else
       fieldset.firstElementChild.textContent = `Postać${famName}:`;
     
+    fieldset.innerHTML +=
+      `
+        <span id="relation-${fid}" style="display:none">${relation}</span>
+      `;
+
     fieldset.innerHTML += 
       `
         <label>

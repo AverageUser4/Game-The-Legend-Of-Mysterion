@@ -37,7 +37,7 @@ button:hover {
 }
 
 .the-main__ui-left {
-  width: 180px;
+  width: 280px;
   height: 600px;
   background-color: cadetblue;
 }
@@ -49,15 +49,21 @@ button:hover {
 }
 
 .the-main__ui-right {
-  width: 180px;
+  width: 280px;
   height: 600px;
   background-color: cadetblue;
 }
 
-.down-ui {
+.chat-container {
   margin-top: 20px;
-  height: 120px;
-  background-color: red;
+  width: 100%;
+  height: 480px;
+  background-color: black;
+}
+
+.chat-iframe {
+  width: 100%;
+  height: 100%;
 }
 
 .the-footer {
