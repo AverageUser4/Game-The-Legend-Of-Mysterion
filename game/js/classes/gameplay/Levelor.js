@@ -288,6 +288,9 @@ class Levelor {
   }
 
   pause() {
+    if(this.paused)
+      return;
+
     this.paused = true;
     this.drawPauseScreen();          
   }

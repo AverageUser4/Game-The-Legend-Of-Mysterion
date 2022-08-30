@@ -16,17 +16,19 @@
   <link rel="icon" href="../shared/resources/images/legend.jpeg">
   <link rel="stylesheet" href="css/main.css">
 
+  <script defer src="js/classes/PopUpor.js"></script>
+
   <script defer src="js/classes/Canvasor.js"></script>
   <script defer src="js/classes/GlobalObjects.js"></script>
   <script defer src="js/classes/PlayerStats.js"></script>
   <script defer src="js/classes/Interactor.js"></script>
 
-  <script defer src="js/classes/Levelor.js"></script>
-  <script defer src="js/classes/Player.js"></script>
-  <script defer src="js/classes/Enemy.js"></script>
-  <script defer src="js/classes/Bullet.js"></script>
-  <script defer src="js/classes/OrbOfResurrection.js"></script>
-  <script defer src="js/classes/HealOrDamage.js"></script>
+  <script defer src="js/classes/gameplay/Levelor.js"></script>
+  <script defer src="js/classes/gameplay/Player.js"></script>
+  <script defer src="js/classes/gameplay/Enemy.js"></script>
+  <script defer src="js/classes/gameplay/Bullet.js"></script>
+  <script defer src="js/classes/gameplay/OrbOfResurrection.js"></script>
+  <script defer src="js/classes/gameplay/HealOrDamage.js"></script>
 
   <script defer src="js/main.js"></script>
 
@@ -48,19 +50,46 @@
 
         <ul class="the-main__ui-list">
 
-          <li><button class="brand-button the-main__ui-list-button">Statystyki</button></li>
-          <li><button class="brand-button the-main__ui-list-button">Ekwipunek</button></li>
-          <li><button class="brand-button the-main__ui-list-button">Osiągnięcia</button></li>
-          <li><button class="brand-button the-main__ui-list-button">Wiadomości</button></li>
+          <li><button data-pop-up="1" data-content="statistics" class="brand-button the-main__ui-list-button">Statystyki</button></li>
+          <li><button data-pop-up="1" data-content="inventory" class="brand-button the-main__ui-list-button">Ekwipunek</button></li>
+          <li><button data-pop-up="1" data-content="achievements" class="brand-button the-main__ui-list-button">Osiągnięcia</button></li>
+          <li><button data-pop-up="1" data-content="quests" class="brand-button the-main__ui-list-button">Misje</button></li>
+          <li><button data-pop-up="1" data-content="messages" class="brand-button the-main__ui-list-button">Wiadomości</button></li>
+          <li><button data-pop-up="1" data-content="plot" class="brand-button the-main__ui-list-button">Fabuła</button></li>
 
         </ul>
 
       </aside>
 
       <div class="the-main__element the-main__canvas-and-various-container">
-        <div class="the-main__various"></div>
+
+        <div class="the-main__various">
+
+          <!-- <div class="the-main__various-content-container">
+
+            <h3 class="the-main__various-header">Statystyki</h3>
+
+            <ul class="the-main__various-list">
+
+              <li class="the-main__various-list-item">Klasa: Wojownik</li>
+              <li class="the-main__various-list-item">Życie: 6000</li>
+              <li class="the-main__various-list-item">Maksymalne zmęczenie: 2000</li>
+              <li class="the-main__various-list-item">Obrażenia: 100-250</li>
+              <li class="the-main__various-list-item">Siła: 5</li>
+              <li class="the-main__various-list-item">Obrona: 5</li>
+              <li class="the-main__various-list-item">Wytrzymałość: 5</li>
+              <li class="the-main__various-list-item">Zręczność: 5</li>
+
+            </ul> 
+
+          </div> -->
+
+        </div>
+
+        <button class="brand-button the-main__various-close-button">X</button>
 
         <canvas tabindex="0" width="800" height="600" class="the-main__canvas"></canvas>
+
       </div>
 
       <aside class="the-main__element the-main__ui-right">

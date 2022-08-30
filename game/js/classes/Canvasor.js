@@ -33,5 +33,3 @@ const canvasor = {
 canvasor.updatePosition();
 window.addEventListener('scroll', () => canvasor.updatePosition());
 window.addEventListener('resize', () => canvasor.updatePosition());
-
-console.log(canvasor)

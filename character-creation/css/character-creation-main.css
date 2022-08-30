@@ -2,6 +2,7 @@ body {
   margin: 0;
   background-color: #00043B;
   color: #BC9645;
+  font-family: sans-serif;
 }
 
 button:hover {

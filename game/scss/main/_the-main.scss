@@ -29,11 +29,41 @@
 .the-main__various {
   display: none;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 600px;
-  background-color: red;
+  top: 50px;
+  left: 150px;
+  width: 500px;
+  height: 500px;
+  background-color: var.$brown;
+  outline: 5px solid var.$dark-brown;
+  overflow: auto;
+}
+
+.the-main__various-close-button {
+  display: none;
+  position: absolute;
+  right: 162px;
+  top: 62px;
+  width: 26px;
+  height: 26px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 50%;
+}
+
+.the-main__various-content-container {
+  padding: 24px;
+}
+
+.the-main__various-header {
+  margin: 0 0 12px;
+}
+
+.the-main__various-list {
+  padding: 0 0 0 16px;
+}
+
+.the-main__various-list-item {
+  margin-bottom: 8px;
 }
 
 .the-main__ui-list {
