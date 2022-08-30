@@ -16,8 +16,6 @@
   <link rel="icon" href="../shared/resources/images/legend.jpeg">
   <link rel="stylesheet" href="css/main.css">
 
-  <script defer src="js/classes/Cinematicor.js"></script>
-
   <script defer src="js/classes/Canvasor.js"></script>
   <script defer src="js/classes/GlobalObjects.js"></script>
   <script defer src="js/classes/PlayerStats.js"></script>
@@ -38,18 +36,6 @@
   
   <!-- <audio loop controls src="resources/music/bonfire.mp3"></audio> -->
 
-  <div class="cinematic">
-
-    <div class="cinematic__media-container">
-      <img draggable="false" class="cinematic__media" alt="NO MEDIA PROVIDED">
-    </div>
-
-    <button class="cinematic__text-button"></button>
-
-    <button class="cinematic__skip-button">POMIŃ -></button>
-
-  </div>
-
   <div class="website-wrapper">
 
     <header class="the-header">
@@ -58,11 +44,32 @@
 
     <main class="the-main">
 
-      <aside class="the-main__ui-left"></aside>
+      <aside class="the-main__element the-main__ui-left">
 
-      <canvas width="800" height="600" class="the-main__canvas"></canvas>
+        <ul class="the-main__ui-list">
 
-      <aside class="the-main__ui-right"></aside>
+          <li><button class="brand-button the-main__ui-list-button">Statystyki</button></li>
+          <li><button class="brand-button the-main__ui-list-button">Ekwipunek</button></li>
+          <li><button class="brand-button the-main__ui-list-button">Osiągnięcia</button></li>
+          <li><button class="brand-button the-main__ui-list-button">Wiadomości</button></li>
+
+        </ul>
+
+      </aside>
+
+      <canvas tabindex="0" width="800" height="600" class="the-main__element the-main__canvas"></canvas>
+
+      <aside class="the-main__element the-main__ui-right">
+
+        <ul class="the-main__ui-list">
+
+          <li><button class="brand-button the-main__ui-list-button">Eliksir życia I</button></li>
+          <li><button class="brand-button the-main__ui-list-button">Eliksir życia II</button></li>
+          <li><button class="brand-button the-main__ui-list-button">Eliksir życia III</button></li>
+
+        </ul>
+
+      </aside>
 
     </main>
 

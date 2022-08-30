@@ -9,4 +9,6 @@ const playerStats = {
   defence: 1,
   endurance: 1,
   dexterity: 1,
+
+  isDead: false,
 }

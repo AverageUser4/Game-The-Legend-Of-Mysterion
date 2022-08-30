@@ -28,6 +28,15 @@ button:hover {
   background-origin: content-box;
 }
 
+.brand-button {
+  background-color: #00043B;
+  color: #BC9645;
+  border: 3px solid #BC9645;
+}
+.brand-button:hover {
+  background-color: #11154c;
+}
+
 .website-wrapper {
   padding-bottom: 80px;
 }

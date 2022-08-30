@@ -37,61 +37,44 @@ button:hover {
   background-color: #11154c;
 }
 
-.the-main {
-  display: flex;
-  gap: 20px;
-}
-.the-main .the-main > * {
-  flex-shrink: 0;
+.cinematic {
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  overflow: auto;
 }
 
-.the-main__element {
-  background-color: #52350a;
-  outline: 5px solid #402e07;
+.cinematic__media-container {
+  margin: 50px auto 0;
+  width: 800px;
+  height: 600px;
+}
+.cinematic__media-container > * {
+  width: 800px;
   height: 600px;
 }
 
-.the-main__ui-left, .the-main__ui-right {
-  width: 280px;
-}
-
-.the-main__canvas {
-  width: 800px;
-}
-
-.the-main__ui-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  list-style: none;
-  margin: 0;
-  padding: 16px;
-}
-
-.the-main__ui-list-button {
+.cinematic__text-button {
   display: block;
-  width: 100%;
+  width: 800px;
   padding: 10px;
-  font-size: 1rem;
+  margin: auto;
+  font-size: 1.4rem;
+  line-height: 120%;
+  border-radius: 0;
+}
+
+.cinematic__skip-button {
+  position: fixed;
+  top: 50px;
+  right: 50px;
   font-weight: bold;
-}
-
-.chat-container {
-  margin-top: 20px;
-  width: 100%;
-  height: 480px;
-  background-color: black;
-}
-
-.chat-iframe {
-  width: 100%;
-  height: 100%;
-}
-
-.the-footer {
-  margin-top: 50px;
-  background-color: green;
-  padding: 10px;
+  font-size: 1.2rem;
+  padding: 12px 16px;
+  border-radius: 0;
 }
 
 /*# sourceMappingURL=main.css.map */

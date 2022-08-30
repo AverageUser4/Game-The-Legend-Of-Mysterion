@@ -1,3 +1,4 @@
+@use '../../../shared/scss/global';
 @use '../../../shared/scss/var';
 
 .cinematic {
@@ -28,12 +29,6 @@
   font-size: 1.4rem;
   line-height: 120%;
   border-radius: 0;
-  background-color: var.$main-background-color;
-  color: var.$main-font-color;
-  border: 3px solid var.$main-font-color;
-  &:hover {
-    background-color: var.$main-background-color--active;
-  }
 }
 
 .cinematic__skip-button {
@@ -44,10 +39,4 @@
   font-size: 1.2rem;
   padding: 12px 16px;
   border-radius: 0;
-  background-color: var.$main-background-color;
-  color: var.$main-font-color;
-  border: 3px solid var.$main-font-color;
-  &:hover {
-    background-color: var.$main-background-color--active;
-  }
 }

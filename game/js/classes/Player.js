@@ -23,7 +23,7 @@ class Player {
   image;
   bullet;
 
-  isDead = false;
+  isDead;
 
   get x() {
     return this.#x;
@@ -113,7 +113,8 @@ class Player {
     if(
         !this.isDead &&
         this.bullet.cooldown <= 0 && 
-        (interactor.isPressed(' ') || interactor.isPressedMouse())
+        (interactor.isPressed(' ') || 
+        (interactor.isPressedMouse() && document.activeElement === canvasor.canvas))
       )
         this.bullet.getThrown(this.x, this.direction);
 
@@ -132,7 +133,7 @@ class Player {
   dealDamage() {
     const min = this.damage / 2;
     const max = this.damage * 2;
-    return Math.floor(Math.random() * max) + min;
+    return Math.floor(Math.random() * max) + min + this.strength;
   }
 
   getDamaged(damage) {

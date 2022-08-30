@@ -12,24 +12,8 @@ class Mainor {
 
     Mainor.hasInstance = true;
 
-    if(!localStorage.getItem('watchedIntro')) {
-      fetch('resources/cinematics/game-intro.json')
-        .then((response) => response.json())
-        .then((json) => {
-          cinematicor.eventTarget.addEventListener('CinematicEnded', 
-            () => this.onCinematicEnded());
-          cinematicor.startCinematic(json);
-          localStorage.setItem('watchedIntro', 'true');
-        });
-    } else {
-      this.onCinematicEnded();
-    }
-
-  }
-
-  onCinematicEnded() {
     this.levelor = new Levelor();
-    setInterval(() => this.gameLoop(), 33);    
+    setInterval(() => this.gameLoop(), 33);  
   }
 
   gameLoop() {
@@ -48,3 +32,4 @@ class Mainor {
 }
 
 const mainor = new Mainor();
+

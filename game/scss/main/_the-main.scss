@@ -1,3 +1,5 @@
+@use '../../../shared/scss/var';
+
 .the-main {
   display: flex;
   gap: 20px;
@@ -6,20 +8,33 @@
   }
 }
 
-.the-main__ui-left {
-  width: 280px;
+.the-main__element {
+  background-color: var.$brown;
+  outline: 5px solid var.$dark-brown;
   height: 600px;
-  background-color: cadetblue;
+}
+
+.the-main__ui-left, .the-main__ui-right {
+  width: 280px;
 }
 
 .the-main__canvas {
   width: 800px;
-  height: 600px;
-  background-color: cadetblue;
 }
 
-.the-main__ui-right {
-  width: 280px;
-  height: 600px;
-  background-color: cadetblue;
+.the-main__ui-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 16px;
+}
+
+.the-main__ui-list-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: bold;
 }

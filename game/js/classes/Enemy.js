@@ -40,6 +40,9 @@
     this.health = 40 * this.level;
     this.healthMax = this.health;
 
+    if(!Math.floor(Math.random() * 20))
+      this.fightsBack = false;
+
     this.image = new Image();
 
     this.image.addEventListener('load', () => {
@@ -175,7 +178,7 @@
   dealDamage() {
     const min = this.damage / 2;
     const max = this.damage * 2;
-    return Math.floor(Math.random() * max) + min;
+    return Math.floor(Math.random() * max) + min + this.strength;
   }
 
   getDamaged(damage) {

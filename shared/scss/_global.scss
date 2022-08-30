@@ -31,3 +31,12 @@ button {
   background-repeat: no-repeat;
   background-origin: content-box;
 }
+
+.brand-button {
+  background-color: var.$main-background-color;
+  color: var.$main-font-color;
+  border: 3px solid var.$main-font-color;
+  &:hover {
+    background-color: var.$main-background-color--active;
+  }
+}

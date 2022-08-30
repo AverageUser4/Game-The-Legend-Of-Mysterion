@@ -336,11 +336,11 @@ class Levelor {
         this.levelMap !== 'tutorial'
       ) {
       if(!this.player.isDead) {
-        canvasor.ctx.strokeText(`Naciśnij 'E', żeby wyjść.`, 15, 470);
-        canvasor.ctx.fillText(`Naciśnij 'E', żeby wyjść.`, 15, 470);
+        canvasor.ctx.strokeText(`Naciśnij 'E', żeby wyjść.`, 15, 450);
+        canvasor.ctx.fillText(`Naciśnij 'E', żeby wyjść.`, 15, 450);
       } else {
-        canvasor.ctx.strokeText(`Musisz odnaleźć kulę ożywienia, żeby wyjść!`, 15, 470);
-        canvasor.ctx.fillText(`Musisz odnaleźć kulę ożywienia, żeby wyjść!`, 15, 470);
+        canvasor.ctx.strokeText(`Musisz odnaleźć kulę ożywienia, żeby wyjść!`, 15, 450);
+        canvasor.ctx.fillText(`Musisz odnaleźć kulę ożywienia, żeby wyjść!`, 15, 450);
       }
     } else if
         (
@@ -349,12 +349,12 @@ class Levelor {
         ) {
       if(!this.player.isDead) {
         const w = canvasor.ctx.measureText(`Naciśnij 'E', żeby wyjść.`).width;
-        canvasor.ctx.strokeText(`Naciśnij 'E', żeby wyjść.`, this.mapEndX - w - 15, 470);
-        canvasor.ctx.fillText(`Naciśnij 'E', żeby wyjść.`, this.mapEndX - w - 15, 470);
+        canvasor.ctx.strokeText(`Naciśnij 'E', żeby wyjść.`, this.mapEndX - w - 15, 450);
+        canvasor.ctx.fillText(`Naciśnij 'E', żeby wyjść.`, this.mapEndX - w - 15, 450);
       } else {
         const w = canvasor.ctx.measureText(`Musisz odnaleźć kulę ożywienia, żeby wyjść!`).width;
-        canvasor.ctx.strokeText(`Musisz odnaleźć kulę ożywienia, żeby wyjść!`, this.mapEndX - w - 15, 470);
-        canvasor.ctx.fillText(`Musisz odnaleźć kulę ożywienia, żeby wyjść!`, this.mapEndX - w - 15, 470);
+        canvasor.ctx.strokeText(`Musisz odnaleźć kulę ożywienia, żeby wyjść!`, this.mapEndX - w - 15, 450);
+        canvasor.ctx.fillText(`Musisz odnaleźć kulę ożywienia, żeby wyjść!`, this.mapEndX - w - 15, 450);
       }
     }
   }

@@ -12,3 +12,17 @@ Systemy:
 
 Pomysły:
   - tutorial programowania
+
+Bugi:
+  - ilość członków rodziny w localStorage jest niepoprawna
+// obrażenia nie powinny być mnożone przez siłę, tylko powinna być do nich dodana
+// a obrażenia powinny być mnożone przez poziom
+
+Hud:
+  lewa strona:
+    - statystyki
+    - wiadomości
+    - ekwipunek
+  prawa strona:
+    - eliksiry
+    - inne rzeczy do użycia w walce

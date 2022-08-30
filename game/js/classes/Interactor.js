@@ -5,8 +5,12 @@ const interactor = {
   pressedKeys: new Set(),
 
   keyDown(e) {
-    if(e.key === ' ')
-      e.preventDefault();
+    switch(e.key) {
+      case ' ':
+      case 'ArrowUp':
+      case 'ArrowDown':
+        e.preventDefault();
+    }
       
     this.pressedKeys.add(e.key);
   },
