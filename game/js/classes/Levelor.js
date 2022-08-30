@@ -4,6 +4,9 @@ class Levelor {
 
   player;
 
+  paused = false;
+  canTogglePause = true;
+
   shouldRedraw = true;
 
   levelMap = 'town';
@@ -158,6 +161,24 @@ class Levelor {
   }
 
   gameLoopIteration() {
+    // pause
+    if(
+        interactor.isPressed('p') &&
+        this.canTogglePause
+      ) {
+        this.canTogglePause = false;
+        setTimeout(() => this.canTogglePause = true, 300);
+
+        if(this.paused)
+          this.unpause();
+        else
+          this.pause();
+    }
+
+    if(this.paused)
+      return;
+    
+    // map change (end level)
     if(
         interactor.isPressed('e') &&
         this.canLeaveMap &&
@@ -264,6 +285,16 @@ class Levelor {
 
   onPlayerResurrection() {
     orbOfResurrection.hide();
+  }
+
+  pause() {
+    this.paused = true;
+    this.drawPauseScreen();          
+  }
+
+  unpause() {
+    this.paused = false;
+    this.shouldRedraw = true;
   }
 
   draw() {
@@ -438,6 +469,23 @@ class Levelor {
     canvasor.ctx.strokeRect(-this.translateOffsetX + 755, 6, 40, 40);
     canvasor.ctx.font = '24px sans-serif';
     canvasor.ctx.fillText('🚫', -this.translateOffsetX + 763, 35);
+  }
+
+  drawPauseScreen() {
+    canvasor.ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+    canvasor.ctx.fillRect(0, 0, canvasor.width, canvasor.height);
+
+    canvasor.ctx.fillStyle = colors.yellow;
+    canvasor.ctx.strokeStyle = 'black';
+    canvasor.ctx.font = '24px sans-serif';
+
+    const text = `PAUZA (Naciśnij 'P', żeby kontynuować.)`;
+    const w = canvasor.ctx.measureText(text).width;
+    const x = canvasor.width / 2 - w / 2;
+    const y = canvasor.height / 5;
+
+    canvasor.ctx.strokeText(text, x, y);
+    canvasor.ctx.fillText(text, x, y);
   }
 
   cameraMovement() {

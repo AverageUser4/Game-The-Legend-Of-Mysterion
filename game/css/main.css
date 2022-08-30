@@ -55,8 +55,22 @@ button:hover {
   width: 280px;
 }
 
+.the-main__canvas-and-various-container {
+  position: relative;
+}
+
 .the-main__canvas {
   width: 800px;
+}
+
+.the-main__various {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 600px;
+  background-color: red;
 }
 
 .the-main__ui-list {

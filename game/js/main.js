@@ -13,7 +13,7 @@ class Mainor {
     Mainor.hasInstance = true;
 
     this.levelor = new Levelor();
-    setInterval(() => this.gameLoop(), 33);  
+    setInterval(() => this.gameLoop(), 33);
   }
 
   gameLoop() {
