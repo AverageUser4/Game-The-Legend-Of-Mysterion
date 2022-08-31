@@ -131,6 +131,25 @@ class Formor {
 
     localStorage.setItem('knownFamilySize', i - 1);
     localStorage.setItem('createdCharacter', 'true');
+
+
+    /*
+      TEMPORARY
+    */
+      localStorage.setItem('class', 'wojownik');
+      localStorage.setItem('level', '1');
+      localStorage.setItem('health', '100');
+      localStorage.setItem('endurance', '1');
+      localStorage.setItem('defence', '1');
+      localStorage.setItem('damage', '5-15');
+      localStorage.setItem('strength', '1');
+      localStorage.setItem('dexterity', '1');
+      localStorage.setItem('energy', '1');
+    /*
+      TEMPORARY
+    */
+
+
     document.location = '../game';
   }
 

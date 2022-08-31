@@ -44,16 +44,6 @@ class Statisticor extends Singleton {
   }
 
   update() {
-    localStorage.setItem('class', 'wojownik');
-    localStorage.setItem('level', '1');
-    localStorage.setItem('health', '100');
-    localStorage.setItem('endurance', '1');
-    localStorage.setItem('defence', '1');
-    localStorage.setItem('damage', '1');
-    localStorage.setItem('strength', '1');
-    localStorage.setItem('dexterity', '1');
-    localStorage.setItem('fatigue', '1');
-
     for(let val of this.allChangable) {
       const which = val.getAttribute('data-stat');
       if(!which.includes('-points'))

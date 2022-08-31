@@ -1,0 +1,39 @@
+// metadata
+
+  - characterCreated - used for navigation, when user goes to page
+    they shouldn't see (anymore)
+
+
+// lore info (each of these has '-x' appended, x stands for id of a given family member -
+   1 means player, 2 - father, 3 - mother, 4 - grandfather, etc.):
+  
+  - name
+  - uuid
+  - username (name + uuid)
+  - height
+  - weight
+  - hairLength
+  - age
+  - birthday
+  - race
+  - hairColor
+  - eyeColor
+
+  - relation - name of relation, makes it easy to make dialog
+    (eg i knew your {relation-3}, she had {hairColor-3} hair)
+  - knownFamilySize - count of family members specified during character creation
+    (eg. 3 if only parents and player are specified) (not sure if it counts in player at the moment)
+
+
+// gameplay info:
+
+  - class (warrior, wizard or archer) - defines images used for player character and it's bullet
+  - level - stuff gets multiplied by it
+
+  - health - health = endurance * 100
+  - endurance - ^
+  - defence - gets substracted from the damage player intercepts
+  - damage - average damage = strength * 10, min damage = damage / 2, max damage = damage * 1.5 (all rounded)
+  - strength - ^
+  - dexterity - does nothing
+  - energy - fatigue points regeneration speed = energy
