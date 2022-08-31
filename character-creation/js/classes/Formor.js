@@ -115,36 +115,42 @@ class Formor {
 
       const relation = document.querySelector(`#relation-${i}`).textContent;
 
-      localStorage.setItem(`name-${i}`, name);
-      localStorage.setItem(`uuid-${i}`, uuid);
-      localStorage.setItem(`username-${i}`, `${name}-${uuid}`);
-      localStorage.setItem(`height-${i}`, height);
-      localStorage.setItem(`weight-${i}`, weight);
-      localStorage.setItem(`hairLength-${i}`, hairLength);
-      localStorage.setItem(`age-${i}`, age);
-      localStorage.setItem(`birthday-${i}`, birthday);
-      localStorage.setItem(`race-${i}`, race);
-      localStorage.setItem(`hairColor-${i}`, hairColor);
-      localStorage.setItem(`eyeColor-${i}`, eyeColor);
-      localStorage.setItem(`relation-${i}`, relation)
+      localStorage.setItem(`lore-name-${i}`, name);
+      localStorage.setItem(`lore-uuid-${i}`, uuid);
+      localStorage.setItem(`lore-username-${i}`, `${name}-${uuid}`);
+      localStorage.setItem(`lore-height-${i}`, height);
+      localStorage.setItem(`lore-weight-${i}`, weight);
+      localStorage.setItem(`lore-hairLength-${i}`, hairLength);
+      localStorage.setItem(`lore-age-${i}`, age);
+      localStorage.setItem(`lore-birthday-${i}`, birthday);
+      localStorage.setItem(`lore-race-${i}`, race);
+      localStorage.setItem(`lore-hairColor-${i}`, hairColor);
+      localStorage.setItem(`lore-eyeColor-${i}`, eyeColor);
+      localStorage.setItem(`lore-relation-${i}`, relation)
     }
 
-    localStorage.setItem('knownFamilySize', i - 1);
-    localStorage.setItem('createdCharacter', 'true');
+    localStorage.setItem('lore-knownFamilySize', i - 1);
+    localStorage.setItem('meta-createdCharacter', 'true');
 
 
     /*
       TEMPORARY
     */
-      localStorage.setItem('class', 'wojownik');
-      localStorage.setItem('level', '1');
-      localStorage.setItem('health', '100');
-      localStorage.setItem('endurance', '1');
-      localStorage.setItem('defence', '1');
-      localStorage.setItem('damage', '5-15');
-      localStorage.setItem('strength', '1');
-      localStorage.setItem('dexterity', '1');
-      localStorage.setItem('energy', '1');
+      localStorage.setItem('character-class', 'wojownik');
+      localStorage.setItem('character-level', '1');
+      localStorage.setItem('character-health', '100');
+      localStorage.setItem('character-endurance', '1');
+      localStorage.setItem('character-defence', '1');
+      localStorage.setItem('character-damage', '5-15');
+      localStorage.setItem('character-strength', '1');
+      localStorage.setItem('character-dexterity', '1');
+      localStorage.setItem('character-energy', '1');
+
+      localStorage.setItem('points-endurance', '0');
+      localStorage.setItem('points-defence', '0');
+      localStorage.setItem('points-strength', '0');
+      localStorage.setItem('points-dexterity', '0');
+      localStorage.setItem('points-energy', '0');
     /*
       TEMPORARY
     */
