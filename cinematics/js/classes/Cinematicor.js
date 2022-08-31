@@ -1,8 +1,6 @@
 'use strict';
 
-class Cinematicor {
-
-  static hasInstance = false;
+class Cinematicor extends Singleton {
 
   cinematicContainer = document.querySelector('.cinematic');
   mediaContainer = document.querySelector('.cinematic__media-container');
@@ -17,10 +15,7 @@ class Cinematicor {
   eventTarget = new Image();
 
   constructor() {
-    if(Cinematicor.hasInstance)
-      throw new Error(`Use global 'cinematicor' object provided with Cinematicor.js file.`);
-
-    Cinematicor.hasInstance = true;
+    super();
 
     this.setVoiceLanguage();
     speechSynthesis.addEventListener('voiceschanged', () => this.setVoiceLanguage());

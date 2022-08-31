@@ -1,17 +1,12 @@
 'use strict';
 
-class Mainor {
-
-  static hasInstance = false;
+class Mainor extends Singleton {
 
   levelor;
   popUpor;
 
   constructor() {
-    if(Mainor.hasInstance)
-      throw new Error('Mainor can have only one instance.');
-
-    Mainor.hasInstance = true;
+    super();
 
     this.popUpor = new PopUpor()
     this.popUpor.eventTarget.addEventListener('popUpOpen', () => this.levelor.pause());
@@ -37,4 +32,3 @@ class Mainor {
 }
 
 const mainor = new Mainor();
-

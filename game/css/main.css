@@ -71,9 +71,11 @@ button:hover {
   left: 150px;
   width: 500px;
   height: 500px;
+  padding: 24px;
+  box-sizing: border-box;
+  overflow: auto;
   background-color: #52350a;
   outline: 5px solid #402e07;
-  overflow: auto;
 }
 
 .the-main__various-close-button {
@@ -86,10 +88,6 @@ button:hover {
   font-size: 14px;
   font-weight: bold;
   border-radius: 50%;
-}
-
-.the-main__various-content-container {
-  padding: 24px;
 }
 
 .the-main__various-header {

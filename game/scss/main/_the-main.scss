@@ -33,9 +33,11 @@
   left: 150px;
   width: 500px;
   height: 500px;
+  padding: 24px;
+  box-sizing: border-box;
+  overflow: auto;
   background-color: var.$brown;
   outline: 5px solid var.$dark-brown;
-  overflow: auto;
 }
 
 .the-main__various-close-button {
@@ -48,10 +50,6 @@
   font-size: 14px;
   font-weight: bold;
   border-radius: 50%;
-}
-
-.the-main__various-content-container {
-  padding: 24px;
 }
 
 .the-main__various-header {
