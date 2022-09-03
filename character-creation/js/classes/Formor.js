@@ -145,12 +145,6 @@ class Formor {
       localStorage.setItem('character-strength', '1');
       localStorage.setItem('character-dexterity', '1');
       localStorage.setItem('character-energy', '1');
-
-      localStorage.setItem('points-endurance', '0');
-      localStorage.setItem('points-defence', '0');
-      localStorage.setItem('points-strength', '0');
-      localStorage.setItem('points-dexterity', '0');
-      localStorage.setItem('points-energy', '0');
     /*
       TEMPORARY
     */

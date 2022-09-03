@@ -23,7 +23,7 @@ class Player {
   image;
   bullet;
 
-  isDead;
+  isDead = false;
 
   get x() {
     return this.#x;
@@ -45,8 +45,11 @@ class Player {
   shouldRedraw = false;
 
   constructor(startOnEnd, mapEndX) {
-    for(let key in playerStats)
-      this[key] = playerStats[key];
+    for(let key in gameplayStats)
+      this[key] = gameplayStats[key];
+
+    this.damage = gameplayStats.damage;
+    this.health = gameplayStats.health;
 
     this.healthMax = this.health;
 
@@ -131,9 +134,9 @@ class Player {
   }
 
   dealDamage() {
-    const min = this.damage / 2;
-    const max = this.damage * 2;
-    return Math.floor(Math.random() * max) + min + this.strength;
+    const min = this.damage.min;
+    const avg = this.damage.average;
+    return Math.floor(Math.random() * avg) + min;
   }
 
   getDamaged(damage) {

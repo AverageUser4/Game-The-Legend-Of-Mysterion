@@ -37,9 +37,11 @@
   - character-dexterity - does nothing
   - character-energy - fatigue points regeneration speed = energy
 
-  points that increase certain stats:  
-    - points-endurance
-    - points-defence
-    - points-strength
-    - points-dexterity
-    - points-energy
+
+  USUNĄĆ:
+    points that increase certain stats:  
+      - points-endurance
+      - points-defence
+      - points-strength
+      - points-dexterity
+      - points-energy

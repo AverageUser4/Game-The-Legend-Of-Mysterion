@@ -70,7 +70,7 @@
     this.x = x;
     this.y = canvasor.height - this.height;
 
-    this.speed = Math.floor(Math.random() * (playerStats.speed - 2)) + 2;
+    this.speed = Math.floor(Math.random() * (gameplayStats.speed - 2)) + 2;
     this.distanceToKeep = Math.floor(Math.random() * 181) + 120;
 
     this.direction = Math.floor(Math.random() * 2) ? 'left' : 'right';
