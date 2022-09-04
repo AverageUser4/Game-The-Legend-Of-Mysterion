@@ -18,18 +18,20 @@
 
   <script defer src="../shared/classes/Singleton.js"></script>
 
-  <script defer src="js/classes/Canvasor.js"></script>
-  <script defer src="js/classes/GlobalObjects.js"></script>
-  <script defer src="js/classes/GameplayStats.js"></script>
-  <script defer src="js/classes/Interactor.js"></script>
+  <script defer src="js/classes/global/Canvasor.js"></script>
+  <script defer src="js/classes/global/GlobalObjects.js"></script>
+  <script defer src="js/classes/global/GameplayStats.js"></script>
+  <script defer src="js/classes/global/Interactor.js"></script>
 
+  <script defer src="js/classes/UI/UIUpdator.js"></script>
+
+  <script defer src="js/classes/pop-ups/PopUpor.js"></script>
   <script defer src="js/classes/pop-ups/Achievementor.js"></script>
   <script defer src="js/classes/pop-ups/Inventoror.js"></script>
   <script defer src="js/classes/pop-ups/Messagor.js"></script>
   <script defer src="js/classes/pop-ups/Plotor.js"></script>
   <script defer src="js/classes/pop-ups/Questor.js"></script>
   <script defer src="js/classes/pop-ups/Statisticor.js"></script>
-  <script defer src="js/classes/pop-ups/PopUpor.js"></script>
 
   <script defer src="js/classes/gameplay/Levelor.js"></script>
   <script defer src="js/classes/gameplay/Player.js"></script>
@@ -49,6 +51,14 @@
   <div class="website-wrapper">
 
     <header class="the-header">
+
+      <ul class="the-header__stats-list">
+
+        <li>Poziom: <span data-header-stat="level"></span></li>
+        <li>Doświadczenie: <span data-header-stat="experience"></span></li>
+        <li>Złoto: <span data-header-stat="gold"></span></li>
+        
+      </ul>
 
     </header>
 

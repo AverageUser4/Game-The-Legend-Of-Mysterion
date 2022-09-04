@@ -82,13 +82,13 @@ class Bullet {
   logic(allTargets) {
     const returnObject = { shouldRedraw: false };
 
-    if(this.cooldown <= 0) {
-      this.cooldown = 0;
+    if(this.cooldown <= 0)
       return returnObject;
-    }
 
     this.x += this.speed;
     this.cooldown -= this.cooldownStep;
+    if(this.cooldown < 0)
+      this.cooldown = 0;
 
     if(this.cooldown < this.cooldownMax * 0.2)
       this.canDamage = false;
