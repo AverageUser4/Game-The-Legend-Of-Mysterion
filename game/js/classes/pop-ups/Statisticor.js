@@ -18,6 +18,8 @@ class Statisticor extends Singleton {
 
           <li class="the-main__various-list-item"> Klasa:                   <span data-stat="class"></span></li>
           <li class="the-main__various-list-item"> Poziom:                  <span data-stat="level"></span></li>
+          <li class="the-main__various-list-item"> Doświadczenie:           <span data-stat="experience"></span></li>
+          <li class="the-main__various-list-item"> Złoto:                   <span data-stat="gold"></span></li>
 
           <li class="the-main__various-list-item"> Życie:                   <span data-stat="health"></span></li>
           <li class="the-main__various-list-item"> Wytrzymałość:            <span data-stat="endurance"></span></li>
@@ -33,11 +35,35 @@ class Statisticor extends Singleton {
 
         <ul class="the-main__various-list">
 
-          <li class="the-main__various-list-item"> Punkty Wytrzymałości:    <span data-stat-points="endurance"></span></li>
-          <li class="the-main__various-list-item"> Punkty Obrony:           <span data-stat-points="defence"></span></li>
-          <li class="the-main__various-list-item"> Punkty Siły:             <span data-stat-points="strength"></span></li>
-          <li class="the-main__various-list-item"> Punkty Zręczności:       <span data-stat-points="dexterity"></span></li>
-          <li class="the-main__various-list-item"> Punkty Energii:          <span data-stat-points="energy"></span></li>
+          <li class="the-main__various-list-item">
+            Punkty Wytrzymałości:    
+            <span data-stat-points="endurance"></span>
+            <button class="the-main__stat-button" data-stat-button="endurance">+</button>
+          </li>
+
+          <li class="the-main__various-list-item">
+            Punkty Obrony:    
+            <span data-stat-points="defence"></span>
+            <button class="the-main__stat-button" data-stat-button="defence">+</button>
+          </li>
+
+          <li class="the-main__various-list-item">
+            Punkty Siły:    
+            <span data-stat-points="strength"></span>
+            <button class="the-main__stat-button" data-stat-button="strength">+</button>
+          </li>
+
+          <li class="the-main__various-list-item">
+            Punkty Zręczności:    
+            <span data-stat-points="dexterity"></span>
+            <button class="the-main__stat-button" data-stat-button="dexterity">+</button>
+          </li>
+
+          <li class="the-main__various-list-item">
+            Punkty Energii:    
+            <span data-stat-points="energy"></span>
+            <button class="the-main__stat-button" data-stat-button="energy">+</button>
+          </li>
 
         </ul>
       `;
@@ -46,7 +72,6 @@ class Statisticor extends Singleton {
     const allPointsBuf = this.content.querySelectorAll('[data-stat-points]');
 
     for(let val of allStatsBuf) {
-      console.log(val)
       const stat = val.getAttribute('data-stat');
       this.allStats.set(stat, val);
     }
@@ -56,46 +81,44 @@ class Statisticor extends Singleton {
       this.allPoints.set(stat, val);
     }
 
-    console.log(this.allStats, this.allPoints)
-
-    // TODO:
     gameplayStats.eventTarget.addEventListener('levelUp', () => this.onLevelUp());
     gameplayStats.eventTarget.addEventListener('statUpdate', (e) => this.onStatUpdate(e));
   }
 
-  onStatUpdate(e) {
-    console.log(e.whichStat)
-    const points = gameplayStats.getPoints(e.whichStat);
-    const statValue = gameplayStats.getStat(e.whichStat);
-
-    console.log(points, statValue)
-  }
-
   update() {
+    // get stats and points and insert them into html
+    // run everytime the window with stats gets open
     for(let [key, val] of this.allStats) {
-      console.log(val)
       const which = val.getAttribute('data-stat');
       const stat = gameplayStats.getStat(which);
 
-      if(typeof stat === 'object')
+      if(which === 'damage')
         val.textContent = `${stat.min} - ${stat.max}`;
+      else if(which === 'class') {
+        let polishName = 'wojownik';
+
+        if(stat === 'wizard')
+          polishName = 'czarodziej';
+        else if(stat === 'archer')
+          polishName = 'łucznik';
+
+        val.textContent = polishName;
+      } 
+      else if(which === 'experience') {
+        const current = gameplayStats.getStat('experience');
+        const required = gameplayStats.getExperienceRequired();
+
+        val.textContent = `${current} / ${required}`;
+      }
       else
         val.textContent = stat;
     }
 
     for(let [key, val] of this.allPoints) {
-      const which = val.getAttribute('data-stat-points');
-      const points = gameplayStats.getPoints(which);
-      val.textContent = points;
-
-      if(points > 1) {
-        const button = document.createElement('button');
-        button.classList.add('the-main__stat-button');
-        button.setAttribute('data-stat-button', which);
-        button.textContent = '+';
-        button.addEventListener('click', () => gameplayStats.updateStat(which));
-        val.appendChild(button);
-      }
+        const which = val.getAttribute('data-stat-points');
+        const points = gameplayStats.getPoints(which);
+        val.textContent = points;
+        val.nextElementSibling.addEventListener('click', () => gameplayStats.updateStat(which));
     }
   }
 
@@ -104,6 +127,23 @@ class Statisticor extends Singleton {
 
     this.container.textContent = '';
     this.container.appendChild(this.content);
+  }
+
+  onStatUpdate(e) {
+    const statValue = gameplayStats.getStat(e.whichStat);
+    const points = gameplayStats.getPoints(e.whichStat);
+
+    this.allStats.get(e.whichStat).textContent = statValue;
+
+    if(e.whichStat !== 'gold' && e.whichStat !== 'experience')
+      this.allPoints.get(e.whichStat).textContent = points;
+
+    if(e.whichStat === 'strength') {
+      const dmg = gameplayStats.getStat('damage');
+      this.allStats.get('damage').textContent = `${dmg.min} - ${dmg.max}`;
+    } else if(e.whichStat === 'endurance') {
+      this.allStats.get('health').textContent = gameplayStats.getStat('health');
+    }
   }
 
 }

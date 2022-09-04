@@ -32,9 +32,9 @@ class Bullet {
     this.shouldRedraw = true;
   }
 
-  constructor(kind, ownerHeight, ownerEndurance = 1) {
-    this.cooldownMax = 36 * ownerEndurance;
-    this.cooldownStep = ownerEndurance;
+  constructor(kind, ownerHeight, ownerLevel = 1, ownerEnergy = 1) {
+    this.cooldownMax = 36 * ownerLevel;
+    this.cooldownStep = ownerEnergy;
 
     this.image = new Image();
 
@@ -82,8 +82,10 @@ class Bullet {
   logic(allTargets) {
     const returnObject = { shouldRedraw: false };
 
-    if(this.cooldown <= 0)
+    if(this.cooldown <= 0) {
+      this.cooldown = 0;
       return returnObject;
+    }
 
     this.x += this.speed;
     this.cooldown -= this.cooldownStep;

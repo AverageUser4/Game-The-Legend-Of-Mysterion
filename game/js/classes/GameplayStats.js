@@ -6,6 +6,8 @@ class GameplayStats extends Singleton {
 
   class;
   level;
+  experience;
+  gold;
 
   get health() {
     return this.endurance * 100;
@@ -38,7 +40,7 @@ class GameplayStats extends Singleton {
     if(this.class === null)
      this.class = 'warrior';
 
-    const stats = ['level', 'endurance', 'defence', 'strength', 'dexterity', 'energy'];
+    const stats = ['level', 'experience', 'gold', 'endurance', 'defence', 'strength', 'dexterity', 'energy'];
     for(let val of stats) {
       this[val] = localStorage.getItem(`character-${val}`);
       
@@ -49,29 +51,48 @@ class GameplayStats extends Singleton {
     }
 
     // debug
-    this.level = 10;
+    this.level = 1000;
   }
 
-  getPoints(which) {
-    return this.level - this[which];
+  addExperience(amount) {
+    const required = this.getExperienceRequired();
+
+    if(this.experience + amount >= required) {
+      amount = this.experience + amount - required;
+      this.levelUp();
+    }
+
+    this.updateStat('experience', amount);
   }
-  
+
+  getExperienceRequired() {
+    return this.level * 250;
+  }
+
   levelUp() {
     this.level++;
     localStorage.setItem('level', this.level);
     this.eventTarget.dispatchEvent(new Event('levelUp'));
   }
 
+  getPoints(which) {
+    return this.level - this[which];
+  }
+
   getStat(which) {
     return this[which];
   }
 
-  updateStat(which) {
-    if(this[which] + 1 > this.level)
+  updateStat(which, amount = 1) {
+    if(
+        which !== 'gold' &&
+        which !== 'experience' &&
+        this[which] + amount > this.level
+      )
       return false;
 
-    this[which]++;
-    localStorage.setItem(which, this[which]);
+    this[which] += amount;
+    localStorage.setItem(`character-${which}`, this[which]);
     const event = new Event(`statUpdate`);
     event.whichStat = which;
     this.eventTarget.dispatchEvent(event);

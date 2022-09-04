@@ -139,6 +139,8 @@ class Levelor {
     enemy.image.addEventListener('ready', () => {
       this.promisedEnemies--;
       this.allEnemies.push(enemy);
+      this.shouldRedraw = true;
+      this.draw();
     });
   }
 
@@ -234,8 +236,13 @@ class Levelor {
       this.allDamagesOrHeals.push(
         new HealOrDamage('damage', this.allEnemies[i].x, this.allEnemies[i].y, dealt));
 
-      if(this.allEnemies[i].isDead)
+      if(this.allEnemies[i].isDead) {
+        const loot = this.allEnemies[i].yieldOnDefeat();
         this.allEnemies.splice(i, 1);
+
+        gameplayStats.addExperience(loot.experience);
+        gameplayStats.updateStat('gold', loot.gold);
+      }
     }
 
     for(let val of this.allEnemies) {

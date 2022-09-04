@@ -3,6 +3,7 @@
 class Player {
 
   class = 'warrior';
+  level;
 
   speed = 7;
   healthMax;
@@ -12,6 +13,7 @@ class Player {
   defence;
   endurance;
   dexterity;
+  energy;
   
   #x = 0;
   y = 500;
@@ -64,6 +66,9 @@ class Player {
     });
 
     this.image.src = bases[this.class].characterSrc;
+
+    gameplayStats.eventTarget.addEventListener('levelUp', () => this.onLevelUp());
+    gameplayStats.eventTarget.addEventListener('statUpdate', (e) => this.onStatUpdate(e));
   }
 
   furtherConstruction(startOnEnd, mapEndX, error = false) {
@@ -83,11 +88,23 @@ class Player {
 
     this.y = canvasor.height - this.height;
 
-    this.bullet = new Bullet(this.class, this.height, this.endurance);
+    this.bullet = new Bullet(this.class, this.height, this.level, this.energy);
 
     this.bullet.image.addEventListener('ready', () => {
       this.image.dispatchEvent(new Event('ready'));
     });
+  }
+
+  onLevelUp() {
+    this.health = this.healthMax;
+  }
+
+  onStatUpdate(e) {
+    this[e.whichStat] = gameplayStats.getStat(e.whichStat);
+
+    if(e.whichStat === 'endurance') {
+      this.health = this.healthMax = gameplayStats.getStat('health');
+    }
   }
 
   logic(mapEndX) {

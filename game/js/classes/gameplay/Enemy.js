@@ -9,10 +9,10 @@
   x = 0;
   y = 500;
 
-  speed = 5;
-  health = 40;
-  healthMax = 40;
   level = 1;
+  health = 25;
+  healthMax = 25;
+  speed = 5;
   damage = 5;
   strength;
   defence;
@@ -197,6 +197,15 @@
     }
 
     return damage;
+  }
+
+  yieldOnDefeat() {
+    const experience = Math.floor(Math.random() * (this.level * 10 + 1)) + this.level * 5;
+    const gold = Math.floor(Math.random() * (10 * this.level + 1))
+    return {
+      experience,
+      gold
+    };
   }
 
   draw(translateOffsetX) {

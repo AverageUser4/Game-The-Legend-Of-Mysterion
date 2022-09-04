@@ -28,6 +28,8 @@
 
   - character-class (warrior, wizard or archer) - defines images used for player character and it's bullet
   - character-level - stuff gets multiplied by it
+  - character-experience - level * 250 (enemies drop 10 experience per level on average)
+  - character-gold - enemy yields 5 gold per level on average
 
   - character-health - health = endurance * 100
   - character-endurance - ^
