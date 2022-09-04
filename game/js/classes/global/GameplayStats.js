@@ -52,16 +52,18 @@ class GameplayStats extends Singleton {
   }
 
   addExperience(amount) {
+    console.log(`amount: ${amount}`);
+
     let current = this.experience + amount;
     let required = this.getExperienceRequired();
 
     while(current >= required) {
-      required = this.getExperienceRequired();
       current -= required;
+      required = this.getExperienceRequired();
       this.levelUp();
     }
 
-    this.updateStat('experience', current);
+    this.overwriteStat('experience', current);
   }
 
   getExperienceRequired() {
@@ -98,7 +100,7 @@ class GameplayStats extends Singleton {
     return this[which];
   }
 
-  updateStat(which, amount = 1) {
+  addToStat(which, amount = 1) {
     if(
         which !== 'gold' &&
         which !== 'experience' &&
@@ -107,6 +109,15 @@ class GameplayStats extends Singleton {
       return false;
 
     this[which] += amount;
+    this.storeAndDispatchEvent(which);
+  }
+
+  overwriteStat(which, newValue) {
+    this[which] = newValue;
+    this.storeAndDispatchEvent(which);
+  }
+
+  storeAndDispatchEvent(which) {
     localStorage.setItem(`character-${which}`, this[which]);
     const event = new Event(`statUpdate`);
     event.whichStat = which;

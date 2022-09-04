@@ -241,7 +241,7 @@ class Levelor {
         this.allEnemies.splice(i, 1);
 
         gameplayStats.addExperience(loot.experience);
-        gameplayStats.updateStat('gold', loot.gold);
+        gameplayStats.addToStat('gold', loot.gold);
       }
     }
 

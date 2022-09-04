@@ -117,7 +117,8 @@ class Statisticor extends Singleton {
         const which = val.getAttribute('data-stat-points');
         const points = gameplayStats.getPoints(which);
         val.textContent = points;
-        val.nextElementSibling.addEventListener('click', () => gameplayStats.updateStat(which));
+        //adds this listener multiple times
+        val.nextElementSibling.addEventListener('click', () => gameplayStats.addToStat(which));
     }
   }
 

@@ -32,9 +32,20 @@ class Bullet {
     this.shouldRedraw = true;
   }
 
-  constructor(kind, ownerHeight, ownerLevel = 1, ownerEnergy = 1) {
-    this.cooldownMax = 36 * ownerLevel;
-    this.cooldownStep = ownerEnergy;
+  constructor(kind, ownerHeight, belongsToPlayer) {
+    if(belongsToPlayer) {
+      this.cooldownMax = 36 * gameplayStats.getStat('level');
+      this.cooldownStep = gameplayStats.getStat('energy');
+
+      gameplayStats.eventTarget.addEventListener('statUpdate', (e) => {
+        if(e.whichStat === 'energy')
+          this.cooldownStep = gameplayStats.getStat('energy');
+      });
+      
+      gameplayStats.eventTarget.addEventListener('levelUp', () => {
+        this.cooldownMax = 36 * gameplayStats.getStat('level');
+      });
+    }
 
     this.image = new Image();
 

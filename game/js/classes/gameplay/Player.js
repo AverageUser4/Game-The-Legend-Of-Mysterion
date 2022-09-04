@@ -88,7 +88,7 @@ class Player {
 
     this.y = canvasor.height - this.height;
 
-    this.bullet = new Bullet(this.class, this.height, this.level, this.energy);
+    this.bullet = new Bullet(this.class, this.height, true);
 
     this.bullet.image.addEventListener('ready', () => {
       this.image.dispatchEvent(new Event('ready'));
@@ -151,6 +151,9 @@ class Player {
   }
 
   dealDamage() {
+    if(debugor.debug)
+      return 999999;
+
     const min = this.damage.min;
     const avg = this.damage.average;
     return Math.floor(Math.random() * avg) + min;
