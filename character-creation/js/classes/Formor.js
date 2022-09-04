@@ -136,7 +136,7 @@ class Formor {
     /*
       TEMPORARY
     */
-      localStorage.setItem('character-class', 'wojownik');
+      localStorage.setItem('character-class', 'warrior');
       localStorage.setItem('character-level', '1');
       localStorage.setItem('character-experience', '0');
       localStorage.setItem('character-gold', '0');

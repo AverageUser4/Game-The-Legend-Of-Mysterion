@@ -1,5 +1,10 @@
 class UIUpdator extends Singleton {
 
+  levelSpan;
+  experienceSpan;
+  goldSpan;
+  statsSpan;
+
   constructor() {
     super();
     
@@ -7,16 +12,22 @@ class UIUpdator extends Singleton {
     this.experienceSpan = document.querySelector('[data-header-stat="experience"]');
     this.goldSpan = document.querySelector('[data-header-stat="gold"]');
 
+    this.statsSpan = document.querySelector('[data-content="statistics"]').children[0];
+
     gameplayStats.eventTarget.addEventListener('levelUp', () => this.onLevelUp());
     gameplayStats.eventTarget.addEventListener('statUpdate', (e) => this.onStatUpdate(e));
 
-    this.onLevelUp();
+    this.onLevelUp(true);
     this.onStatUpdate({ whichStat: 'experience' });
     this.onStatUpdate({ whichStat: 'gold' });
   }
 
-  onLevelUp() {
+  onLevelUp(initial = false) {
     this.levelSpan.textContent = gameplayStats.getStat('level');
+    this.onStatUpdate({ whichStat: 'experience' });
+
+    if(!initial)
+      this.statsSpan.textContent = '❗';
   }
 
   onStatUpdate(e) {
@@ -24,8 +35,13 @@ class UIUpdator extends Singleton {
       const current = gameplayStats.getStat('experience');
       const required = gameplayStats.getExperienceRequired();
       this.experienceSpan.textContent = `${current} / ${required}`;
-    } else if(e.whichStat === 'gold') {
+    } 
+    else if(e.whichStat === 'gold') {
       this.goldSpan.textContent = gameplayStats.getStat('gold');
+    } 
+    else if
+      (!gameplayStats.hasAvailablePoints()) {
+        this.statsSpan.textContent = '';
     }
   }
 

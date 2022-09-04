@@ -81,7 +81,6 @@ class Statisticor extends Singleton {
       this.allPoints.set(stat, val);
     }
 
-    gameplayStats.eventTarget.addEventListener('levelUp', () => this.onLevelUp());
     gameplayStats.eventTarget.addEventListener('statUpdate', (e) => this.onStatUpdate(e));
   }
 

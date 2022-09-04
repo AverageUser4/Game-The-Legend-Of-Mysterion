@@ -1,8 +1,14 @@
 'use strict';
 
 const debugor = {
-  debug: false,
+  debug: true,
 }
+
+if(debugor.debug)
+  window.addEventListener('keyup', (e) => {
+    if(e.key === 'f')
+      gameplayStats.levelUp();
+  });
 
 const colors = {
   red: 'rgb(180, 30, 20)',

@@ -9,6 +9,13 @@ class GameplayStats extends Singleton {
   experience;
   gold;
 
+  endurance;
+  defence;
+  strength;
+  dexterity;
+  energy;  
+  speed = 7;
+
   get health() {
     return this.endurance * 100;
   }
@@ -26,13 +33,6 @@ class GameplayStats extends Singleton {
     return x;
   }
 
-  endurance;
-  defence;
-  strength;
-  dexterity;
-  energy;  
-  speed = 7;
-
   constructor() {
     super();
 
@@ -49,34 +49,49 @@ class GameplayStats extends Singleton {
       else
         this[val] = Number(this[val]);
     }
-
-    // debug
-    this.level = 1000;
   }
 
   addExperience(amount) {
-    const required = this.getExperienceRequired();
+    let current = this.experience + amount;
+    let required = this.getExperienceRequired();
 
-    if(this.experience + amount >= required) {
-      amount = this.experience + amount - required;
+    while(current >= required) {
+      required = this.getExperienceRequired();
+      current -= required;
       this.levelUp();
     }
 
-    this.updateStat('experience', amount);
+    this.updateStat('experience', current);
   }
 
   getExperienceRequired() {
+    if(debugor.debug)
+      return this.level * 2;
+
     return this.level * 250;
   }
 
   levelUp() {
     this.level++;
-    localStorage.setItem('level', this.level);
+    localStorage.setItem('character-level', this.level);
     this.eventTarget.dispatchEvent(new Event('levelUp'));
   }
 
   getPoints(which) {
     return this.level - this[which];
+  }
+
+  hasAvailablePoints() {
+    if([
+      'endurance',
+      'defence',
+      'strength',
+      'dexterity',
+      'energy'
+    ].every((val) => this.getPoints(val) === 0))
+      return false;
+
+    return true;
   }
 
   getStat(which) {
