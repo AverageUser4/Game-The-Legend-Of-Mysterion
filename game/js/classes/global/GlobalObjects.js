@@ -1,7 +1,7 @@
 'use strict';
 
 const debugor = {
-  debug: true,
+  debug: false,
 }
 
 if(debugor.debug)

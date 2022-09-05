@@ -216,6 +216,21 @@ class FormAssemblor {
     fieldset.lastElementChild.appendChild(sel);
     fieldset.lastElementChild.lastElementChild.id = `eye-color-${fid}`;
 
+    if(!famName) {
+      fieldset.innerHTML += 
+      `
+        <fieldset style="margin-bottom: 0">
+
+          <legend>Wybierz klasę:</legend>
+
+          <label>Wojownik<input value="warrior" checked name="class" type="radio"></label>
+          <label>Czarodziej<input value="wizard" name="class" type="radio"></label>
+          <label>Łucznik<input value="archer" name="class" type="radio"></label>
+
+        </fieldset>
+      `;
+    }
+
     this.advancedButton.insertAdjacentElement('beforebegin', fieldset);
 
     const ranges = document.querySelectorAll('input[type="range"]');

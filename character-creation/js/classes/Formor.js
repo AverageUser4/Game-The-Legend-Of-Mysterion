@@ -133,28 +133,24 @@ class Formor {
     localStorage.setItem('meta-createdCharacter', 'true');
 
     localStorage.setItem('position-map', 'tutorial');
-    localStorage.setItem('character-x', '0');
+    localStorage.setItem('position-x', '0');
     localStorage.setItem('position-difficulty', '0');
 
-    /*
-      TEMPORARY
-    */
-      localStorage.setItem('character-class', 'warrior');
-      localStorage.setItem('character-level', '1');
-      localStorage.setItem('character-experience', '0');
-      localStorage.setItem('character-gold', '0');
-      localStorage.setItem('character-health', '100');
-      localStorage.setItem('character-endurance', '1');
-      localStorage.setItem('character-defence', '1');
-      localStorage.setItem('character-damage', '5-15');
-      localStorage.setItem('character-strength', '1');
-      localStorage.setItem('character-dexterity', '1');
-      localStorage.setItem('character-energy', '1');
-    /*
-      TEMPORARY
-    */
 
+    const checkedClass = document.querySelector('[name="class"]:checked').value;
+    localStorage.setItem('character-class', checkedClass);
 
+    localStorage.setItem('character-level', '1');
+    localStorage.setItem('character-experience', '0');
+    localStorage.setItem('character-gold', '0');
+    localStorage.setItem('character-health', '100');
+    localStorage.setItem('character-endurance', '1');
+    localStorage.setItem('character-defence', '1');
+    localStorage.setItem('character-damage', '5-15');
+    localStorage.setItem('character-strength', '1');
+    localStorage.setItem('character-dexterity', '1');
+    localStorage.setItem('character-energy', '1');
+ 
     document.location = '../game';
   }
 
