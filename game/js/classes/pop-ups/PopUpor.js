@@ -12,7 +12,7 @@ class PopUpor extends Singleton {
   inventory = new Inventoror(this.container);
   messages = new Messagor(this.container);
   plot = new Plotor(this.container);
-  quest = new Questor(this.container);
+  quests = new Questor(this.container);
   statistics = new Statisticor(this.container);
 
   constructor() {

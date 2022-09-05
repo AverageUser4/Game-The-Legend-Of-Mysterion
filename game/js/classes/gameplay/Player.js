@@ -46,7 +46,9 @@ class Player {
   // returned after logic
   shouldRedraw = false;
 
-  constructor(startOnEnd, mapEndX) {
+  constructor(startOnEnd, mapEndX, getFromStorage = false) {
+    this.getFromStorage = getFromStorage;
+
     for(let key in gameplayStats)
       this[key] = gameplayStats[key];
 
@@ -85,6 +87,11 @@ class Player {
       this.direction = 'left';
       this.x = mapEndX - this.width;
     }
+
+    if(this.getFromStorage)
+      this.x = positionor.getInfo('x');
+
+    console.log(this.x)
 
     this.y = canvasor.height - this.height;
 

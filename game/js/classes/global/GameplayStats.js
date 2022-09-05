@@ -67,8 +67,8 @@ class GameplayStats extends Singleton {
   }
 
   getExperienceRequired() {
-    if(debugor.debug)
-      return this.level * 2;
+    // if(debugor.debug)
+    //   return this.level * 2;
 
     return this.level * 250;
   }

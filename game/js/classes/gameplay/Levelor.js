@@ -32,11 +32,40 @@ class Levelor {
   canLeaveMap = false;
 
   startOnEnd = false;
+  getFromStorage = false;
 
-  constructor(levelMap = 'tutorial', levelDifficulty = 0, startOnEnd = false) {  
-    this.levelMap = levelMap;
-    this.levelDifficulty = levelDifficulty;
-    this.startOnEnd = startOnEnd;
+  playerPositionUpdateIntervalId;
+
+  constructor(options) {
+    if(debugor.debug) {
+      window.addEventListener('keydown', (e) => {
+        if(e.key === 'm')
+          this.endLevel('next');
+        else if(e.key === 'n')
+          this.endLevel('previous');
+      }); 
+    }
+
+    if(options.getFromStorage) {
+      this.getFromStorage = true;
+      this.levelMap = positionor.getInfo('map');
+      this.levelDifficulty = positionor.getInfo('difficulty');
+    } else {
+      this.levelMap = 'tutorial';
+      this.levelDifficulty = 0;
+      this.startOnEnd = false;
+  
+      for(let key in options)
+        this[key] = options[key];
+    }
+
+    positionor.setInfo('map', this.levelMap);
+    positionor.setInfo('difficulty', this.levelDifficulty);
+    this.playerPositionUpdateIntervalId = setInterval(() => {
+      const x = this.player?.x;
+      if(typeof x !== 'undefined')
+        positionor.setInfo('x', x);
+    }, 3000);
 
     if(this.levelDifficulty === 0) {
       this.previousMap = 'tutorial';
@@ -91,7 +120,7 @@ class Levelor {
 
     this.mapEndX = this.backgroundRepeatCount * this.backgroundWidth;
 
-    this.player = new Player(this.startOnEnd, this.mapEndX);
+    this.player = new Player(this.startOnEnd, this.mapEndX, this.getFromStorage);
     
     for(let i = 0; i < Math.floor(Math.random() * 4) + 2; i++)
       this.spawnEnemy(Math.floor(Math.random() * 450) + 250);
@@ -190,17 +219,9 @@ class Levelor {
           this.player.x < 100 &&
           this.levelMap !== 'tutorial'
         ) {
-        this.changeMap = { 
-          newMap: this.previousMap,
-          difficulty: this.levelDifficulty - 1,
-          startOnEnd: true,
-        };
+          this.endLevel('previous');
       } else if(this.player.x > this.mapEndX - this.player.width - 100) {
-        this.changeMap = { 
-          newMap: this.nextMap, 
-          difficulty: this.levelDifficulty + 1,
-          startOnEnd: false,
-        };
+          this.endLevel('next');
       }
     }
 
@@ -280,6 +301,24 @@ class Levelor {
       orbOfResurrection.show(this.mapEndX);
 
     this.draw();
+  }
+
+  endLevel(direction) {
+    if(direction === 'next') {
+      this.changeMap = { 
+        levelMap: this.nextMap, 
+        levelDifficulty: this.levelDifficulty + 1,
+        startOnEnd: false,
+      };
+    } else {
+      this.changeMap = { 
+        levelMap: this.previousMap,
+        levelDifficulty: this.levelDifficulty - 1,
+        startOnEnd: true,
+      };
+    }
+
+    clearInterval(this.playerPositionUpdateIntervalId);
   }
 
   onPlayerDeath() {

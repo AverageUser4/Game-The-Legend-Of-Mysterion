@@ -38,31 +38,31 @@ class Statisticor extends Singleton {
           <li class="the-main__various-list-item">
             Punkty Wytrzymałości:    
             <span data-stat-points="endurance"></span>
-            <button class="the-main__stat-button" data-stat-button="endurance">+</button>
+            <button class="brand-button the-main__stat-button" data-stat-button="endurance">+</button>
           </li>
 
           <li class="the-main__various-list-item">
             Punkty Obrony:    
             <span data-stat-points="defence"></span>
-            <button class="the-main__stat-button" data-stat-button="defence">+</button>
+            <button class="brand-button the-main__stat-button" data-stat-button="defence">+</button>
           </li>
 
           <li class="the-main__various-list-item">
             Punkty Siły:    
             <span data-stat-points="strength"></span>
-            <button class="the-main__stat-button" data-stat-button="strength">+</button>
+            <button class="brand-button the-main__stat-button" data-stat-button="strength">+</button>
           </li>
 
           <li class="the-main__various-list-item">
             Punkty Zręczności:    
             <span data-stat-points="dexterity"></span>
-            <button class="the-main__stat-button" data-stat-button="dexterity">+</button>
+            <button class="brand-button the-main__stat-button" data-stat-button="dexterity">+</button>
           </li>
 
           <li class="the-main__various-list-item">
             Punkty Energii:    
             <span data-stat-points="energy"></span>
-            <button class="the-main__stat-button" data-stat-button="energy">+</button>
+            <button class="brand-button the-main__stat-button" data-stat-button="energy">+</button>
           </li>
 
         </ul>

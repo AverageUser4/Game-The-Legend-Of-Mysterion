@@ -39,11 +39,7 @@
   - character-dexterity - does nothing
   - character-energy - fatigue points regeneration speed = energy
 
-
-  USUNĄĆ:
-    points that increase certain stats:  
-      - points-endurance
-      - points-defence
-      - points-strength
-      - points-dexterity
-      - points-energy
+// position info:
+  - position-map - name of a map, eg. 'tutorial', 'town'
+  - postition-difficulty - difficulty of the map (level of enemies is based on it)
+  - position-x - player's position in the map
