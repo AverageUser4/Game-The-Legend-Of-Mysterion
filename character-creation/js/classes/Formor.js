@@ -151,7 +151,7 @@ class Formor {
     localStorage.setItem('character-dexterity', '1');
     localStorage.setItem('character-energy', '1');
  
-    document.location = '../game';
+    document.location = '../cinematics';
   }
 
   updateFamilyTree() {
