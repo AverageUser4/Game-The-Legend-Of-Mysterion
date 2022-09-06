@@ -130,6 +130,7 @@ class Formor {
     }
 
     localStorage.setItem('lore-knownFamilySize', i - 1);
+    
     localStorage.setItem('meta-createdCharacter', 'true');
 
     localStorage.setItem('position-map', 'tutorial');
